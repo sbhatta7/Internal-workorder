@@ -1,0 +1,60 @@
+body {
+	color: white;
+}
+
+h2{
+	font-size: 1.75em;
+	margin: 0px;
+}
+
+h3 {
+	color: #0D3F60;
+}
+
+#summaryTable #approvalTable{
+	color: black;
+}
+
+#mainpage {
+	height:100%;
+	padding:0px;
+	background:url('../images/splash_background_top.png') repeat-y top left
+}
+
+.mainTitle {
+	position:relative; 
+	top:-67px; 
+	text-align:center;
+}
+#maincontent {
+	height:100%;
+	background:url('../images/splash_background_bottom.png') no-repeat bottom left;
+}
+#gradiant_left {
+	position:absolute;
+	top:0px;
+	left:-10px;
+	height:100%;
+	width:10px;
+	background:url('../images/gradiant_left.jpg') repeat-y top left;
+}
+#gradiant_right {
+	position:absolute;
+	top:0px;
+	right:-10px;
+	height:100%;
+	width:10px;
+	background:url('../images/gradiant_right.jpg') repeat-y top left;
+}
+ul#mainMenu li {
+	cursor: pointer;
+	display: inline;
+	margin: 0px 20px;
+}
+ul#mainMenu li a {
+	text-decoration: none;
+}
+ul#mainMenu li a img {
+	border: none;
+	padding: 5px 10px;
+}

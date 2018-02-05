@@ -1,0 +1,109 @@
+.formDataTable 
+{
+	border:none;
+	padding:3px 3px 3px 3px;
+	font-weight: bold;
+	/*width:410px;	*/
+	font-size: 12px;
+}
+.formDataTable td {
+	vertical-align: top;
+}
+
+
+.formDataLabel
+{
+	padding-right:20px;
+	text-align:right;
+	vertical-align: top;
+}
+
+.requiredFormIndicator
+{
+	color:red;
+	width:5px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+input, textarea
+{
+	width:200px;
+}
+
+select {
+	width: 204px;	
+}
+
+.disabled {
+    background-color: #A6A6A6;
+    border: solid 1px #828282;
+}
+
+.fileinput
+{
+	width:400px;
+	font-size: 12px;
+}
+
+.addButtonSelect
+{
+	width:125px;
+}
+.addButton
+{
+	width:45px;	
+}
+
+table.multiAddTable{
+	width:100%;
+	font-size: 12px;
+}
+table.multiAddTable thead {
+	background-color: #E4E4E4;
+}
+table.multiAddTable tbody {
+	background-color: #FEFEFE;
+}
+table.multiAddTable, table.multiAddTable th, table.multiAddTable td
+{
+	border: 1px solid #ddd;
+}
+
+table.multiAddTable td {
+	padding: .25em .5em;
+	vertical-align: middle;
+	text-align: left;
+}
+
+table.multiAddTable input {
+	width: 100%;
+}
+
+.noneRow{
+	font-weight: normal;
+}
+dialogDiv {
+	background-color: #FFFFFF;
+}
+
+#hardwareAssetRecoveryTable {
+	width: 700px;
+}
+
+#hardwareAssetRecoveryTable input {
+	width: 200px;
+}
+
+.countdown input {
+	width: auto;
+}
+/* Don't set width for checkboxes */
+.noCheckboxWidth input[type='checkbox']{
+    width:auto !important;
+}
+
+#eidSearch, #managerEidSearch {
+	margin-bottom: -4px;
+	cursor: pointer;
+}

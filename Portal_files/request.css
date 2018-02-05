@@ -1,0 +1,36 @@
+body {
+        color: white;
+}
+table.requestTable {
+	font: 12px "Trebuchet MS",sans-serif;
+	color:  black;
+	text-align: center;
+	border: 1px solid #D3D3D3;
+}
+
+table.requestTable a {
+	color: #0000EE;
+}
+
+/* keep headers from wrapping */ 
+table.requestTable th { 
+	white-space: nowrap; 
+}
+
+tr.requestInProgressOdd td,tr.requestInProgressEven td {
+        background-color: #E6735C;
+}
+tr.requestDraftOdd td,tr.requestDraftEven td {
+        background-color: #8AE65C;
+}
+tr.requestDefaultOdd td,tr.requestDefaultEven td {
+        background-color: #DFE7EB;
+}
+tr.requestHeader th {
+	background: #B2C5D8;
+	color: black;
+	font-weight: bold;
+}
+a img {
+	border: none;
+}
