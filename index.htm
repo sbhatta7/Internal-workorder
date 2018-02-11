@@ -104,6 +104,64 @@
                 }
             });
 
+            $("#showMoreSummaryTable").click(function() {
+                /*if ($("#hideSummaryTable").val() == "Hide") {
+                    $('#summaryTable').hide();
+                    $("#hideSummaryTable").width("150px");
+                    $("#hideSummaryTable").val("Show Recent Requests");
+                } else {
+                    $('#summaryTable').show();
+                    $("#hideSummaryTable").width("50px");
+                    $("#hideSummaryTable").val("Hide");
+                }*/
+                var str = '<tr class="requestDefaultOdd">' +
+                    '<td>Q123456</td>' +
+                    '<td>firefox - Saurav Bhattacharyya - Aug 18, 2014</td>' +
+                    '<td>Saurav Bhattacharyya/sbhatta7</td>' +
+                    '<td>Complete</td>' +
+                    '<td>08/12/2014</td>' +
+                    '<td>08/18/2014</td>' +
+                    '<td></td>' +
+                    '<td>' +
+                    '	<a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;' +
+                    '	<a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;' +
+                    '	<a title="Sub Request History" href="" target="_blank"><img id="historyImg2" src="./Portal_files/history_folder.png"></a>' +
+                    '</td>' +
+                    '</tr>';
+                str += '<tr class="requestDefaultOdd">' +
+                    '<td>Q897656</td>' +
+                    '<td>visio - Saurav Bhattacharyya - May 18, 2014</td>' +
+                    '<td>Saurav Bhattacharyya/sbhatta7</td>' +
+                    '<td>Complete</td>' +
+                    '<td>05/12/2014</td>' +
+                    '<td>05/18/2014</td>' +
+                    '<td></td>' +
+                    '<td>' +
+                    '	<a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;' +
+                    '	<a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;' +
+                    '	<a title="Sub Request History" href="" target="_blank"><img id="historyImg2" src="./Portal_files/history_folder.png"></a>' +
+                    '</td>' +
+                    '</tr>';
+
+                str += '<tr class="requestDefaultOdd">' +
+                    '<td>Q897656</td>' +
+                    '<td>office 12 - Saurav Bhattacharyya - Jan 18, 2014</td>' +
+                    '<td>Saurav Bhattacharyya/sbhatta7</td>' +
+                    '<td>Complete</td>' +
+                    '<td>01/12/2014</td>' +
+                    '<td>01/18/2014</td>' +
+                    '<td></td>' +
+                    '<td>' +
+                    '	<a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;' +
+                    '	<a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;' +
+                    '	<a title="Sub Request History" href="" target="_blank"><img id="historyImg2" src="./Portal_files/history_folder.png"></a>' +
+                    '</td>' +
+                    '</tr>';
+
+                $('#summaryTable').append(str)
+
+            });
+
             $("#tipStatus").tooltip({
                 position: "top right",
                 offset: [5, 10],
@@ -295,7 +353,8 @@
                                         </table>
                                     </div>
                                     <div style="width: 100%; text-align: right;">
-                                        <input style="width: 50px" type="button" id="hideSummaryTable" value="Hide">&nbsp;<input style="width: 50px" type="button" value="More" onclick="location=&#39;requestHistory.do&#39;">
+                                        <input style="width: 50px" type="button" id="hideSummaryTable" value="Hide">&nbsp;
+                                        <input style="width: 50px" type="button" id="showMoreSummaryTable" value="More">
                                     </div>
                                 </div>
                                 <!-- end data table div -->
@@ -492,8 +551,7 @@
 
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-helpForm" style="display: none; z-index: 1000; outline: 0px; position: absolute;">
         <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-helpForm">Question/Feedback</span><a href="" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div>
-        <form id="helpForm" style=""
-            class="ui-dialog-content ui-widget-content">
+        <form id="helpForm" style="" class="ui-dialog-content ui-widget-content">
             <p class="validateTips">All form fields are required.</p>
             <fieldset>
                 <label for="name">Name</label> <input type="text" name="fromName" id="helpFromName" class="text ui-widget-content ui-corner-all"> <label for="email">Email</label> <input type="text" name="fromEmail" id="helpEmail" value="" class="text ui-widget-content ui-corner-all">
@@ -544,8 +602,7 @@
     </div>
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-browser-check-modal" style="display: none; z-index: 1000; outline: 0px;">
         <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-browser-check-modal">Please Note</span><a href="" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div>
-        <div id="browser-check-modal"
-            class="ui-dialog-content ui-widget-content">
+        <div id="browser-check-modal" class="ui-dialog-content ui-widget-content">
             <p>
                 <b>This application is optimized for Internet Explorer 8!</b>
             </p>
