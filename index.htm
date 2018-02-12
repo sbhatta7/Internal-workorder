@@ -13,6 +13,8 @@
     <link type="text/css" href="./Portal_files/eup.css" rel="stylesheet">
     <link type="text/css" href="./Portal_files/formData.css" rel="stylesheet">
     <link type="text/css" href="./Portal_files/request.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+
     <!-- Splash overwrites some of the CSS from eup.css for the home page -->
     <link type="text/css" href="./Portal_files/eupSplash.css" rel="stylesheet">
 
@@ -20,9 +22,9 @@
     <script type="text/javascript" src="./Portal_files/jquery-ui-1.8.14.custom.min.js"></script>
     <script type="text/javascript" src="./Portal_files/jquery.tools.min.js"></script>
     <script type="text/javascript" src="./Portal_files/help.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 
-
-    <script type="text/javascript" src="./Portal_files/jquery.dataTables.js"></script>
+    <!--script type="text/javascript" src="./Portal_files/jquery.dataTables.js"></script-->
     <script type="text/javascript" src="./Portal_files/requestDataTables.js"></script>
     <script type="text/javascript" src="./Portal_files/browser-check.js" defer=""></script>
     <script type="text/javascript" src="./Portal_files/home.js"></script>
@@ -36,6 +38,11 @@
                     }
                 });
             });
+			
+			//Calls Sorting Function
+			$('#summaryTable').DataTable( {
+				"order": [[ 4, "asc" ]]
+			} );
         });
 
         function loadTab(tabindex) {
@@ -95,7 +102,7 @@
             $("#hideSummaryTable").click(function() {
                 if ($("#hideSummaryTable").val() == "Hide") {
                     $('#summaryTable').hide();
-                    $("#hideSummaryTable").width("150px");
+                    $("#hideSummaryTable").width("165px");
                     $("#hideSummaryTable").val("Show Recent Requests");
                 } else {
                     $('#summaryTable').show();
@@ -104,16 +111,7 @@
                 }
             });
 
-            $("#showMoreSummaryTable").click(function() {
-                /*if ($("#hideSummaryTable").val() == "Hide") {
-                    $('#summaryTable').hide();
-                    $("#hideSummaryTable").width("150px");
-                    $("#hideSummaryTable").val("Show Recent Requests");
-                } else {
-                    $('#summaryTable').show();
-                    $("#hideSummaryTable").width("50px");
-                    $("#hideSummaryTable").val("Hide");
-                }*/
+            /*$("#showMoreSummaryTable").click(function() {
                 var str = '<tr class="requestDefaultOdd">' +
                     '<td>Q123456</td>' +
                     '<td>firefox - Saurav Bhattacharyya - Aug 18, 2014</td>' +
@@ -160,7 +158,7 @@
 
                 $('#summaryTable').append(str)
 
-            });
+            });*/
 
             $("#tipStatus").tooltip({
                 position: "top right",
@@ -168,7 +166,13 @@
                 effect: "fade",
                 tip: ".statusTip"
             });
-
+			
+			
+			$("#contact").tooltip({
+                position: "left",
+                offset: [50, -50],
+                effect: "fade"
+            });
         });
     </script>
 </head>
@@ -191,7 +195,7 @@
                         <div class="btnHome">
                             <a href="">Home</a>
                         </div>
-                        <div class="btnHelp">
+                        <div class="btnHelp" id="contact" title="Contact us">
                             <span>Contact Us</span>
                         </div>
 
@@ -237,7 +241,7 @@
 
 
                     <!-- end home page buttons -->
-                    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all noBackgroundOrBorder">
+                    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all noBackgroundOrBorder" style="width: 1050px;">
                         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all noBackgroundOrBorder">
                             <li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="Portal.htm">Requests</a></li>
                             <li class="ui-state-default ui-corner-top"><a href="index.htm">Pending Approvals</a></li>
@@ -281,11 +285,11 @@
                                             <tbody>
                                                 <tr class="requestDefaultOdd">
                                                     <td>Q2587311</td>
-                                                    <td>MAC-TOUCH BAR-- Saurav Bhattacharyya - Apr 24, 2017</td>
+                                                    <td>MAC-TOUCH BAR</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
-                                                    <td>04/24/2017</td>
-                                                    <td>05/09/2017</td>
+                                                    <td>2017/04/24</td>
+                                                    <td>2017/05/09</td>
                                                     <td></td>
                                                     <td>
                                                         <a href="" class="tip-init"><img src="./Portal_files/copy.png"></a>&nbsp;
@@ -295,11 +299,11 @@
                                                 </tr>
                                                 <tr class="requestDefaultEven">
                                                     <td>Q2519971</td>
-                                                    <td>Mysql workbench - Saurav Bhattacharyya - Jan 22, 2017</td>
+                                                    <td>Mysql workbench</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
-                                                    <td>01/22/2017</td>
-                                                    <td>02/07/2017</td>
+                                                    <td>2017/01/22</td>
+                                                    <td>2017/02/07</td>
                                                     <td></td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
@@ -309,11 +313,11 @@
                                                 </tr>
                                                 <tr class="requestDefaultOdd">
                                                     <td>Q2392834</td>
-                                                    <td>google chrome - Saurav Bhattacharyya - Jul 18, 2016</td>
+                                                    <td>google chrome</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
-                                                    <td>07/18/2016</td>
-                                                    <td>08/02/2016</td>
+                                                    <td>2016/07/18</td>
+                                                    <td>2016/08/02</td>
                                                     <td></td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
@@ -323,11 +327,11 @@
                                                 </tr>
                                                 <tr class="requestDefaultEven">
                                                     <td>Q2247217</td>
-                                                    <td> - Saurav Bhattacharyya - Jan 13, 2016</td>
-                                                    <td>MS office - Saurav Bhattacharyya/sbhatta7</td>
+                                                    <td>MS office</td>
+                                                    <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
-                                                    <td>01/13/2016</td>
-                                                    <td>01/28/2016</td>
+                                                    <td>2016/01/13</td>
+                                                    <td>2016/01/28</td>
                                                     <td></td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
@@ -337,11 +341,109 @@
                                                 </tr>
                                                 <tr class="requestDefaultOdd">
                                                     <td>Q2046100</td>
-                                                    <td>MACBook- - Saurav Bhattacharyya - Jun 11, 2015</td>
+                                                    <td>MACBook</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
-                                                    <td>06/11/2015</td>
-                                                    <td>06/26/2015</td>
+                                                    <td>2015/06/11</td>
+                                                    <td>2015/06/26</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q2945877</td>
+                                                    <td>Phone Service</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/15</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultOdd">
+                                                    <td>Q1485256</td>
+                                                    <td>Dell XPS Touch</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/11</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q3541752</td>
+                                                    <td>Micrsoft Office</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/12</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultOdd">
+                                                    <td>Q3552144</td>
+                                                    <td>Adobe Reader</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/12</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q3412877</td>
+                                                    <td>Google chrome</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/12</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultOdd">
+                                                    <td>Q3214589</td>
+                                                    <td>MATLAB</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/13</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q3001798</td>
+                                                    <td>MSSQL Workbench</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/14</td>
                                                     <td></td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
@@ -354,7 +456,7 @@
                                     </div>
                                     <div style="width: 100%; text-align: right;">
                                         <input style="width: 50px" type="button" id="hideSummaryTable" value="Hide">&nbsp;
-                                        <input style="width: 50px" type="button" id="showMoreSummaryTable" value="More">
+                                        <!--input style="width: 50px" type="button" id="showMoreSummaryTable" value="More"-->
                                     </div>
                                 </div>
                                 <!-- end data table div -->
@@ -513,11 +615,7 @@
     <div class="statusTip">
         <b>Cancelled</b> - This request has been cancelled. Please click on the request number in the Quote # column for more information.
         <br><b>Complete</b> - This request has been completed.
-        <br><b>Draft</b> - This request is saved in your queue but has not yet been submitted. Please click on the request number in the Quote # column and complete and submit this request if needed.
-        <br><b>HPSM Only</b> - This request was submitted prior to the IT Work Order portal database update on October 25, 2013. Please note that no changes or updates can be made to these work orders. Given the database changes do not use the copy function.
-        <br><b>Information Needed</b> - This indicates that the request requires additional information from you before it can be processed. Please click on the request number in the Quote # column for more information.
         <br><b>In Progress</b> - The request has been successfully created and assigned to the performing groups to facilitate.
-        <br><b>Rescheduled</b> - The request has been rescheduled and will be completed at a later date. You will receive an e-mail with more information.
         <br><b>Submitted</b> - The request has been submitted successfully to the Work Order Team and is in the process of being reviewed.
         <br><br>Barring any problems or need for additional information from you, the request will be assigned to the performers within 24 hours of submission.
     </div>
