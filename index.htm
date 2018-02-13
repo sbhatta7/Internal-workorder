@@ -13,7 +13,8 @@
     <link type="text/css" href="./Portal_files/eup.css" rel="stylesheet">
     <link type="text/css" href="./Portal_files/formData.css" rel="stylesheet">
     <link type="text/css" href="./Portal_files/request.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.min.css"/>
+
 
     <!-- Splash overwrites some of the CSS from eup.css for the home page -->
     <link type="text/css" href="./Portal_files/eupSplash.css" rel="stylesheet">
@@ -41,7 +42,7 @@
 			
 			//Calls Sorting Function
 			$('#summaryTable').DataTable( {
-				"order": [[ 4, "asc" ]]
+				"order": [[ 4, "desc" ]]
 			} );
         });
 
@@ -244,8 +245,8 @@
                     <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all noBackgroundOrBorder" style="width: 1050px;">
                         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all noBackgroundOrBorder">
                             <li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="Portal.htm">Requests</a></li>
-                            <li class="ui-state-default ui-corner-top"><a href="index.htm">Pending Approvals</a></li>
-                            <li class="ui-state-default ui-corner-top"><a href="index.htm">Software Requests</a></li>
+                            <!--li class="ui-state-default ui-corner-top"><a href="index.htm">Pending Approvals</a></li>
+                            <li class="ui-state-default ui-corner-top"><a href="index.htm">Software Requests</a></li-->
                         </ul>
                         <div id="tab_Requests" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
                             <div class="tabContent">
