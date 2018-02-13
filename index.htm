@@ -44,6 +44,8 @@
 			$('#summaryTable').DataTable( {
 				"order": [[ 4, "desc" ]]
 			} );
+			
+			
         });
 
         function loadTab(tabindex) {
@@ -111,7 +113,8 @@
                     $("#hideSummaryTable").val("Hide");
                 }
             });
-
+			
+			
             /*$("#showMoreSummaryTable").click(function() {
                 var str = '<tr class="requestDefaultOdd">' +
                     '<td>Q123456</td>' +
@@ -168,10 +171,30 @@
                 tip: ".statusTip"
             });
 			
+			$("#tipTarget").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".targetDateTip"
+            });
+			
+			$("#tipTitle").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".titleTip"
+            });
+			
+			$("#tipNotes").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".notesTip"
+            });
 			
 			$("#contact").tooltip({
-                position: "left",
-                offset: [50, -50],
+                position: "bottom right",
+                offset: [5, 5],
                 effect: "fade"
             });
         });
@@ -242,7 +265,7 @@
 
 
                     <!-- end home page buttons -->
-                    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all noBackgroundOrBorder" style="width: 1050px;">
+                    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all noBackgroundOrBorder" style="width: 1200px;">
                         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all noBackgroundOrBorder">
                             <li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="Portal.htm">Requests</a></li>
                             <!--li class="ui-state-default ui-corner-top"><a href="index.htm">Pending Approvals</a></li>
@@ -260,7 +283,7 @@
                                                         <div class="DataTables_sort_wrapper">Quote #<span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 108.021px;">
-                                                        <div class="DataTables_sort_wrapper">Title<span class="DataTables_sort_icon"></span></div>
+                                                        <div class="DataTables_sort_wrapper">Title<img src="./Portal_files/tooltip.png" id="tipTitle" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 97.0208px;">
                                                         <div class="DataTables_sort_wrapper">Requested For<span class="DataTables_sort_icon"></span></div>
@@ -272,10 +295,10 @@
                                                         <div class="DataTables_sort_wrapper">Requested Date<span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 84.0208px;">
-                                                        <div class="DataTables_sort_wrapper">Target Date<span class="DataTables_sort_icon"></span></div>
+                                                        <div class="DataTables_sort_wrapper">Target Date<img src="./Portal_files/tooltip.png" id="tipTarget" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 50.0208px;">
-                                                        <div class="DataTables_sort_wrapper">Notes<span class="DataTables_sort_icon"></span></div>
+                                                        <div class="DataTables_sort_wrapper">Notes<img src="./Portal_files/tooltip.png" id="tipNotes" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 122.021px;">
                                                         <div class="DataTables_sort_wrapper">Copy/Print/History<span class="DataTables_sort_icon"></span></div>
@@ -305,7 +328,7 @@
                                                     <td>Complete</td>
                                                     <td>2017/01/22</td>
                                                     <td>2017/02/07</td>
-                                                    <td></td>
+                                                    <td>Follow first time login steps outlined in email</td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
                                                         <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
@@ -347,7 +370,7 @@
                                                     <td>Complete</td>
                                                     <td>2015/06/11</td>
                                                     <td>2015/06/26</td>
-                                                    <td></td>
+                                                    <td>Please follow instructions on onboarding email.</td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
                                                         <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
@@ -361,7 +384,7 @@
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
                                                     <td>2018/01/15</td>
-                                                    <td></td>
+                                                    <td>Please set up voice mail</td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
                                                         <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
@@ -375,7 +398,7 @@
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
                                                     <td>2018/01/11</td>
-                                                    <td></td>
+                                                    <td>Please follow instructions on onboarding email.</td>
                                                     <td>
                                                         <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
                                                         <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
@@ -620,7 +643,29 @@
         <br><b>Submitted</b> - The request has been submitted successfully to the Work Order Team and is in the process of being reviewed.
         <br><br>Barring any problems or need for additional information from you, the request will be assigned to the performers within 24 hours of submission.
     </div>
-
+	
+	<div class="targetDateTip">
+		Requests have different expected completion times based on type.
+		<br><b>Hardware</b> - This request takes 1 to 10 days.
+		<br><b>Software</b> - This request takes 1 to 5 days.
+		<br><b>Phone Service</b> - This request takes 1 to 7 days.
+		<br><br>Contact us if your request is taking longer than normal.
+	</div>
+	
+	<div class="titleTip">
+		Requests have different types:
+		<br><b>* Hardware</b> - New computer or accessory.
+		<br><b>* Software</b>
+		<br><b>* Phone Service</b> - Connect phone service to new location.
+		<br><br>Contact us for more info.
+	</div>
+	
+	<div class="notesTip">
+		Brief Special Instructions, Modifications, or Cancellation 
+		<br>reason will be listed here.
+		<br><br>Contact us for more info.
+	</div>
+	
     <div class="addVdiPreDefPersonaTip">
         <b>Task worker</b> - User has limited privileges in OS. No ability to install applications or device drivers. Session will run few applications in total and a limited number of applications concurrently. User persona is redirected outside of the
         OS. Users will have limited session persistence, in the event of a session disconnect or when moving from one endpoint to another.
@@ -695,7 +740,7 @@
         <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1003;"></div>
         <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1004;"></div>
         <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-            <div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Submit</span></button><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+            <div class="ui-dialog-buttonset"><button type="button" id="sendmail" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Submit</span></button><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
                     role="button"><span class="ui-button-text">Cancel</span></button></div>
         </div>
     </div>
