@@ -487,6 +487,21 @@ li {
 	-webkit-box-shadow:0 0 10px #000;
 }
 
+.originDateTip {
+	background-color:#FFFF99;
+	border:1px solid #6D6968;
+	padding:10px 15px;
+	width:400px;
+	display:none;
+	color:#000;
+	text-align:left;
+	font-size:12px;
+	
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
+}
+
 .titleTip {
 	background-color:#FFFF99;
 	border:1px solid #6D6968;
@@ -507,6 +522,36 @@ li {
 	border:1px solid #6D6968;
 	padding:10px 15px;
 	width:320px;
+	display:none;
+	color:#000;
+	text-align:left;
+	font-size:12px;
+	
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
+}
+
+.quoteTip {
+	background-color:#FFFF99;
+	border:1px solid #6D6968;
+	padding:10px 15px;
+	width:320px;
+	display:none;
+	color:#000;
+	text-align:left;
+	font-size:12px;
+	
+	/* outline radius for mozilla/firefox only */
+	-moz-box-shadow:0 0 10px #000;
+	-webkit-box-shadow:0 0 10px #000;
+}
+
+.userTip {
+	background-color:#FFFF99;
+	border:1px solid #6D6968;
+	padding:10px 15px;
+	width:200px;
 	display:none;
 	color:#000;
 	text-align:left;
