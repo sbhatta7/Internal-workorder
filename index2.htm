@@ -42,7 +42,8 @@
 			
 			//Calls Sorting Function
 			$('#summaryTable').DataTable( {
-				"order": [[ 4, "desc" ]]
+				"order": [[ 4, "desc" ]],
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
 			} );
 			
 			
@@ -114,55 +115,6 @@
                 }
             });
 			
-			
-            /*$("#showMoreSummaryTable").click(function() {
-                var str = '<tr class="requestDefaultOdd">' +
-                    '<td>Q123456</td>' +
-                    '<td>firefox - Saurav Bhattacharyya - Aug 18, 2014</td>' +
-                    '<td>Saurav Bhattacharyya/sbhatta7</td>' +
-                    '<td>Complete</td>' +
-                    '<td>08/12/2014</td>' +
-                    '<td>08/18/2014</td>' +
-                    '<td></td>' +
-                    '<td>' +
-                    '	<a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;' +
-                    '	<a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;' +
-                    '	<a title="Sub Request History" href="" target="_blank"><img id="historyImg2" src="./Portal_files/history_folder.png"></a>' +
-                    '</td>' +
-                    '</tr>';
-                str += '<tr class="requestDefaultOdd">' +
-                    '<td>Q897656</td>' +
-                    '<td>visio - Saurav Bhattacharyya - May 18, 2014</td>' +
-                    '<td>Saurav Bhattacharyya/sbhatta7</td>' +
-                    '<td>Complete</td>' +
-                    '<td>05/12/2014</td>' +
-                    '<td>05/18/2014</td>' +
-                    '<td></td>' +
-                    '<td>' +
-                    '	<a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;' +
-                    '	<a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;' +
-                    '	<a title="Sub Request History" href="" target="_blank"><img id="historyImg2" src="./Portal_files/history_folder.png"></a>' +
-                    '</td>' +
-                    '</tr>';
-
-                str += '<tr class="requestDefaultOdd">' +
-                    '<td>Q897656</td>' +
-                    '<td>office 12 - Saurav Bhattacharyya - Jan 18, 2014</td>' +
-                    '<td>Saurav Bhattacharyya/sbhatta7</td>' +
-                    '<td>Complete</td>' +
-                    '<td>01/12/2014</td>' +
-                    '<td>01/18/2014</td>' +
-                    '<td></td>' +
-                    '<td>' +
-                    '	<a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;' +
-                    '	<a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;' +
-                    '	<a title="Sub Request History" href="" target="_blank"><img id="historyImg2" src="./Portal_files/history_folder.png"></a>' +
-                    '</td>' +
-                    '</tr>';
-
-                $('#summaryTable').append(str)
-
-            });*/
 
             $("#tipStatus").tooltip({
                 position: "top right",
@@ -196,6 +148,27 @@
                 position: "bottom right",
                 offset: [5, 5],
                 effect: "fade"
+            });
+			
+			$("#tipQuote").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+				tip: ".quoteTip"
+            });
+			
+			$("#tipUser").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+				tip: ".userTip"
+            });
+			
+			$("#tipDate").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+				tip: ".originDateTip"
             });
         });
     </script>
@@ -280,19 +253,19 @@
                                             <thead>
                                                 <tr class="requestHeader">
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 66.0208px;">
-                                                        <div class="DataTables_sort_wrapper">Quote #<span class="DataTables_sort_icon"></span></div>
+                                                        <div class="DataTables_sort_wrapper">Quote #<img src="./Portal_files/tooltip.png" id="tipQuote" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 108.021px;">
                                                         <div class="DataTables_sort_wrapper">Title<img src="./Portal_files/tooltip.png" id="tipTitle" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 97.0208px;">
-                                                        <div class="DataTables_sort_wrapper">Requested For<span class="DataTables_sort_icon"></span></div>
+                                                        <div class="DataTables_sort_wrapper">Requested By<img src="./Portal_files/tooltip.png" id="tipUser" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 78.0208px;">
                                                         <div class="DataTables_sort_wrapper">Status <img src="./Portal_files/tooltip.png" id="tipStatus" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 105.021px;">
-                                                        <div class="DataTables_sort_wrapper">Requested Date<span class="DataTables_sort_icon"></span></div>
+                                                        <div class="DataTables_sort_wrapper">Requested Date<img src="./Portal_files/tooltip.png" id="tipDate" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
                                                     </th>
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 84.0208px;">
                                                         <div class="DataTables_sort_wrapper">Target Date<img src="./Portal_files/tooltip.png" id="tipTarget" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
@@ -309,7 +282,7 @@
                                             <tbody>
                                                 <tr class="requestDefaultOdd">
                                                     <td>Q2587311</td>
-                                                    <td>MAC-TOUCH BAR</td>
+                                                    <td>"H" MAC-TOUCH BAR</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
                                                     <td>2017/04/24</td>
@@ -323,7 +296,7 @@
                                                 </tr>
                                                 <tr class="requestDefaultEven">
                                                     <td>Q2519971</td>
-                                                    <td>Mysql workbench</td>
+                                                    <td>"S" Mysql workbench</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
                                                     <td>2017/01/22</td>
@@ -337,7 +310,7 @@
                                                 </tr>
                                                 <tr class="requestDefaultOdd">
                                                     <td>Q2392834</td>
-                                                    <td>google chrome</td>
+                                                    <td>"S" Google Chrome</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
                                                     <td>2016/07/18</td>
@@ -351,7 +324,7 @@
                                                 </tr>
                                                 <tr class="requestDefaultEven">
                                                     <td>Q2247217</td>
-                                                    <td>MS office</td>
+                                                    <td>"S" MS office</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
                                                     <td>2016/01/13</td>
@@ -365,7 +338,7 @@
                                                 </tr>
                                                 <tr class="requestDefaultOdd">
                                                     <td>Q2046100</td>
-                                                    <td>MACBook</td>
+                                                    <td>"H" MACBook</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
                                                     <td>Complete</td>
                                                     <td>2015/06/11</td>
@@ -379,7 +352,7 @@
                                                 </tr>
 												<tr class="requestDefaultEven">
                                                     <td>Q2945877</td>
-                                                    <td>Phone Service</td>
+                                                    <td>"P" Phone Service</td>
                                                     <td>Othmane Ouardi</td>
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
@@ -393,7 +366,7 @@
                                                 </tr>
 												<tr class="requestDefaultOdd">
                                                     <td>Q1485256</td>
-                                                    <td>Dell XPS Touch</td>
+                                                    <td>"H" Dell XPS Touch</td>
                                                     <td>Othmane Ouardi</td>
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
@@ -407,7 +380,7 @@
                                                 </tr>
 												<tr class="requestDefaultEven">
                                                     <td>Q3541752</td>
-                                                    <td>Micrsoft Office</td>
+                                                    <td>"S" Micrsoft Office</td>
                                                     <td>Othmane Ouardi</td>
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
@@ -421,7 +394,7 @@
                                                 </tr>
 												<tr class="requestDefaultOdd">
                                                     <td>Q3552144</td>
-                                                    <td>Adobe Reader</td>
+                                                    <td>"S" Adobe Reader</td>
                                                     <td>Othmane Ouardi</td>
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
@@ -435,7 +408,7 @@
                                                 </tr>
 												<tr class="requestDefaultEven">
                                                     <td>Q3412877</td>
-                                                    <td>Google chrome</td>
+                                                    <td>"S" Google Chrome</td>
                                                     <td>Othmane Ouardi</td>
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
@@ -449,7 +422,7 @@
                                                 </tr>
 												<tr class="requestDefaultOdd">
                                                     <td>Q3214589</td>
-                                                    <td>MATLAB</td>
+                                                    <td>"S" MATLAB</td>
                                                     <td>Othmane Ouardi</td>
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
@@ -463,7 +436,7 @@
                                                 </tr>
 												<tr class="requestDefaultEven">
                                                     <td>Q3001798</td>
-                                                    <td>MSSQL Workbench</td>
+                                                    <td>"S" MSSQL Workbench</td>
                                                     <td>Othmane Ouardi</td>
                                                     <td>Complete</td>
                                                     <td>2018/01/10</td>
@@ -478,10 +451,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div style="width: 100%; text-align: right;">
+                                    <!--div style="width: 100%; text-align: right;">
                                         <input style="width: 50px" type="button" id="hideSummaryTable" value="Hide">&nbsp;
-                                        <!--input style="width: 50px" type="button" id="showMoreSummaryTable" value="More"-->
-                                    </div>
+                                        <!--input style="width: 50px" type="button" id="showMoreSummaryTable" value="More">
+                                    </div-->
                                 </div>
                                 <!-- end data table div -->
                             </div>
@@ -641,7 +614,7 @@
         <br><b>Complete</b> - This request has been completed.
         <br><b>In Progress</b> - The request has been successfully created and assigned to the performing groups to facilitate.
         <br><b>Submitted</b> - The request has been submitted successfully to the Work Order Team and is in the process of being reviewed.
-        <br><br>Barring any problems or need for additional information from you, the request will be assigned to the performers within 24 hours of submission.
+        <br><br>Barring any problems or need for additional information from you, the request will be assigned to a provisioner within 24 hours of submission.
     </div>
 	
 	<div class="targetDateTip">
@@ -652,11 +625,20 @@
 		<br><br>Contact us if your request is taking longer than normal.
 	</div>
 	
+	<div class="originDateTip">
+		Date user request was received.<br>
+		<br>Estimate delivery date based on:
+		<br><b>Hardware</b> - This request takes 1 to 10 days.
+		<br><b>Software</b> - This request takes 1 to 5 days.
+		<br><b>Phone Service</b> - This request takes 1 to 7 days.
+		<br><br>Contact us if your request is taking longer than normal.
+	</div>
+	
 	<div class="titleTip">
 		Requests have different types:
-		<br><b>* Hardware</b> - New computer or accessory.
-		<br><b>* Software</b>
-		<br><b>* Phone Service</b> - Connect phone service to new location.
+		<br><b>* H: Hardware</b> - New computer or accessory.
+		<br><b>* S: Software</b>
+		<br><b>* P: Phone Service</b> - Connect phone service to new location.
 		<br><br>Contact us for more info.
 	</div>
 	
@@ -664,6 +646,15 @@
 		Brief Special Instructions, Modifications, or Cancellation 
 		<br>reason will be listed here.
 		<br><br>Contact us for more info.
+	</div>
+	
+	<div class="quoteTip">
+		Request identification number
+		<br>Use this ID in all communications for support
+	</div>
+	
+	<div class="userTip">
+		User making request
 	</div>
 	
     <div class="addVdiPreDefPersonaTip">
