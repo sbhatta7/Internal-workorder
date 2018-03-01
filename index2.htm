@@ -43,7 +43,9 @@
 			//Calls Sorting Function
 			$('#summaryTable').DataTable( {
 				"order": [[ 4, "desc" ]],
-				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+				"scrollY":        "450px",
+				"scrollCollapse": true
 			} );
 			
 			
