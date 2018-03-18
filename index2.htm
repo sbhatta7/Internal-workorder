@@ -42,6 +42,14 @@
 			
 			//Calls Sorting Function
 			$('#summaryTable').DataTable( {
+				"ajax": 'data.txt',
+				"columnDefs": [
+				{
+					"data": null,
+					"defaultContent": "<a title=\"Copy Request\"><img src=\"./Portal_files/copy.png\"></a>&nbsp;<a title=\"Print Request\" target=\"_blank\"><img src=\"./Portal_files/print_icon.png\"></a>&nbsp;<a title=\"Sub Request History\" target=\"_blank\"><img src=\"./Portal_files/history_folder.png\"></a>",
+					"targets": -1
+				}
+				],
 				"order": [[ 4, "desc" ]],
 				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 				"scrollY":        "450px",
@@ -282,7 +290,7 @@
                                             </thead>
 
                                             <tbody>
-                                                <tr class="requestDefaultOdd">
+                                                <!--tr class="requestDefaultOdd">
                                                     <td>Q2587311</td>
                                                     <td>"H" MAC-TOUCH BAR</td>
                                                     <td>Saurav Bhattacharyya/sbhatta7</td>
@@ -449,7 +457,7 @@
                                                         <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
                                                         <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
                                                     </td>
-                                                </tr>
+                                                </tr-->
                                             </tbody>
                                         </table>
                                     </div>
