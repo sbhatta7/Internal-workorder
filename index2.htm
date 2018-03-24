@@ -64,7 +64,7 @@
                 case 0:
                     //custom plugin in requestDataTables.js
                     eup.setupRequests({
-                        eid: "ltg593",
+                        eid: "asw",
                         displayLength: 5,
                         bInfo: false,
                         bSort: false,
@@ -79,7 +79,7 @@
 
                 case 1:
                     eup.setupApprovals({
-                        eid: "ltg593",
+                        eid: "asw",
                         displayLength: 5,
                         bInfo: false,
                         bSort: false,
@@ -92,7 +92,7 @@
                     break;
                 case 2:
                     eup.setupSoftware({
-                        eid: "ltg593",
+                        eid: "asw",
                         displayLength: 5,
                         bInfo: false,
                         bSort: false,
@@ -180,7 +180,42 @@
                 effect: "fade",
 				tip: ".originDateTip"
             });
+			
+			$( "#onboardreq" )
+			.click(function() {
+				//alert("hi");
+				$( "#onboardForm" ).dialog( "open" );
+			});
+			
+			 $( "#onboardForm" ).dialog({
+					autoOpen: false,
+					height: 525,
+					width: 500,
+					modal: true
+					
+					
+				});
+			 
+			 $("#notes").keydown(function() {
+					limitText(this,1000, $("#notescountdown"));
+				});
+				
+				$("#notes").keyup(function() {
+					limitText(this,1000, $("#notescountdown"));
+				});
+				
+				
+				$( "#submitonboard" )
+				.click(function() {
+					// write to data table
+					$("#reqstatus").style("font-color:green").html("Request Created<br/>");
+					
+				});
+				
         });
+        
+       
+        
     </script>
 </head>
 
@@ -228,7 +263,7 @@
                     <div style="position:relative; top:-30px; text-align:center;">
                         <ul id="mainMenu" style="margin-left:-50px">
                             <li>
-                                <a href=""><img width="130px" src="./Portal_files/onboard-request-new.png" class=""></a>
+                                <a href=""><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
                             </li>
                             <li>
                                 <a href=""><img width="130px" src="./Portal_files/modify-request-new.png" class=""></a>
@@ -672,7 +707,10 @@
         <br><b>VDI Applications</b> - Removes an application from your Virtual Desktop.
         <br>NOTE: "Core" Applications common to all desktops cannot be removed.
     </div>
+ 
+ 
 
+ 
 
 
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-helpForm" style="display: none; z-index: 1000; outline: 0px; position: absolute;">
@@ -713,6 +751,28 @@
             </div>
             <!-- RFC C00599857 -- 1/25/2012 -- END -->
         </form>
+        <!-- Onboard request start -->
+        
+        <form id="onboardForm" style="" class="ui-dialog-content ui-widget-content">
+            <p class="validateTips">All form fields are required.</p>
+            <fieldset>
+            <span id="reqstatus"></span>
+                <label for="title">Title</label> <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all"> <br/>
+                <label for="RequestedBy">Requested By</label> <input type="text" name="requestdBy" id="requestdBy" value="" class="text ui-widget-content ui-corner-all"> <br/>
+                
+                
+                <div class="countdown">
+                    You have <input readonly="readonly" type="text" id="notescountdown" size="4" value="1000"> characters out of 1000 left.
+                </div>
+                <textarea id="notes" name="content" rows="5"></textarea><br/>
+                <input type="button" id="submitonboard" value="submit">
+            </fieldset>
+            
+        </form>
+        
+        <!-- onboard request end -->
+        
+        
         <div class="ui-resizable-handle ui-resizable-n"></div>
         <div class="ui-resizable-handle ui-resizable-e"></div>
         <div class="ui-resizable-handle ui-resizable-s"></div>
