@@ -50,7 +50,7 @@
 					"targets": -1
 				}
 				],
-				"order": [[ 4, "desc" ]],
+				"order": [[ 4, "asc" ]],
 				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 				"scrollY":        "450px",
 				"scrollCollapse": true
@@ -185,18 +185,18 @@
 			
 			 $( "#onboardForm" ).dialog({
 					autoOpen: false,
-					height: 525,
+					height: 300,
 					width: 500,
 					modal: true	,
 					Cancel: function() {
 						alert("cancel");
 						$( this ).dialog( "close" );
 					},
-					open: function() {
+					/*open: function() {
 						//alert("open");
-						$("#requestdBy1").val($("#sessionUserName").val());
+						//$("#requestdBy1").val($("#sessionUserName").val());
 						//$("#helpEmail").val($("#sessionUserEmail").val());
-					},
+					},*/
 					close: function() {
 						//alert("close");
 						//allFields.val( "" ).removeClass( "ui-state-error" );
@@ -211,13 +211,13 @@
 				$( "#onboardForm" ).dialog( "open" );
 			});
 			 
-			 $("#notes").keydown(function() {
+			 /*$("#notes").keydown(function() {
 					limitText(this,1000, $("#notescountdown"));
 				});
 				
 				$("#notes").keyup(function() {
 					limitText(this,1000, $("#notescountdown"));
-				});
+				});*/
 				
 				
 				$( "#submitonboard" )
@@ -227,7 +227,7 @@
 					var bValid = true;
 					bValid = bValid && checkLength( name, "title", 3, 30 );
 					bValid = bValid && checkLength( email, "requestdBy1", 7, 80 );
-					bValid = bValid && checkLength( content, "notescountdown", 1, 1000 );
+					//bValid = bValid && checkLength( content, "notescountdown", 1, 1000 );
 					alert(bValid);
 					if ( bValid ) {
 						//update data table
@@ -242,19 +242,49 @@
 				.click(function() {
 					// write to data table
 					//alert("onboard sub");
-					var title = $("#title"),
-					requestdBy1 = $("#requestdBy1"),
-					notescountdown = $("#notescountdown"),
-					allFields = $( [] ).add( title ).add( requestdBy1 ).add( notescountdown );
+					var title = $("#title").val(),
+					requestdBy1 = $("#requestdBy1").val(),
+					//notescountdown = $("#notescountdown"),
+					allFields = $( [] ).add( title ).add( requestdBy1 );
 				   allFields.removeClass( "ui-state-error" );
 					var bValid = true;
 					bValid = bValid && checkLength( title, "title", 3, 30 );
 					bValid = bValid && checkLength( requestdBy1, "requestdBy1", 7, 80 );
-					bValid = bValid && checkLength( notescountdown, "notescountdown", 3, 1000 );
+					//bValid = bValid && checkLength( notescountdown, "notescountdown", 3, 1000 );
 					//alert(bValid);
 					if ( bValid ) {
 						//update data table
+						var Quote = 'Q' + Math.round(Math.random() * (999 - 111 + 1)) + 111;
+						
+						//Generating today's date in format for DataTables
+						var today = new Date();
+						var dd = today.getDate();
+						var mm = today.getMonth()+1; //January is 0!
+						var yyyy = today.getFullYear();
+
+						if(dd<10) {
+							dd = '0'+dd
+						} 
+
+						if(mm<10) {
+							mm = '0'+mm
+						} 
+
+						today = yyyy + '/' + mm + '/' + dd;
+						
+						//Add row to Table
+						var t = $('#summaryTable').DataTable();
+						t.row.add( [
+							Quote,
+							title,
+							requestdBy1,
+							'In progress',
+							today,
+							'',
+							''
+						] ).draw( true );
 						$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
+						$('#onboardForm')[0].reset();
 						//$( "#onboardForm" ).dialog( "close" );
 					}
 					
@@ -264,6 +294,8 @@
 				.click(function() {
 					// write to data table
 					//alert("cancel sub");
+					$('#onboardForm')[0].reset();
+					$("#reqstatus").addClass("ui-state-error").html("");
 					$( "#onboardForm" ).dialog( "close" );
 					
 				});
@@ -273,7 +305,7 @@
         });
         
         function checkLength( o, n, min, max ) {
-    		if ( o.val().length > max || o.val().length < min ) {
+    		if ( o.length > max || o.length < min ) {
     			o.addClass( "ui-state-error" );
     			updateTips( "Length of " + n + " must be between " +
     				min + " and " + max + "." );
@@ -828,10 +860,10 @@
                 <label for="RequestedBy">Requested By</label> <input type="text" name="requestdBy" id="requestdBy1" value="" class="text ui-widget-content ui-corner-all"> <br/>
                 
                 
-                <div class="countdown">
+                <!--div class="countdown">
                     You have <input readonly="readonly" type="text" id="notescountdown" size="4" value="1000"> characters out of 1000 left.
                 </div>
-                <textarea id="notes" name="content" rows="5"></textarea><br/>
+                <textarea id="notes" name="content" rows="5"></textarea--><br/>
                 <div class="ui-dialog-buttonset"><button type="button" id="onboardsub" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
                 <span class="ui-button-text">Submit</span></button><button id="cancelsub" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
                     role="button"><span class="ui-button-text">Close</span></button></div>
