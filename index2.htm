@@ -187,7 +187,22 @@
 					autoOpen: false,
 					height: 525,
 					width: 500,
-					modal: true	
+					modal: true	,
+					Cancel: function() {
+						alert("cancel");
+						$( this ).dialog( "close" );
+					},
+					open: function() {
+						//alert("open");
+						$("#requestdBy1").val($("#sessionUserName").val());
+						//$("#helpEmail").val($("#sessionUserEmail").val());
+					},
+					close: function() {
+						//alert("close");
+						//allFields.val( "" ).removeClass( "ui-state-error" );
+						$("#countdown").val("1000");
+						//$('#helpSubject option:first').prop("selected", true);
+					}
 				});
 	    
 	    $( "#onboardreq" )
@@ -208,13 +223,65 @@
 				$( "#submitonboard" )
 				.click(function() {
 					// write to data table
-					$("#reqstatus").style("font-color:green").html("Request Created<br/>");
+					//alert("submitted");
+					var bValid = true;
+					bValid = bValid && checkLength( name, "title", 3, 30 );
+					bValid = bValid && checkLength( email, "requestdBy1", 7, 80 );
+					bValid = bValid && checkLength( content, "notescountdown", 1, 1000 );
+					alert(bValid);
+					if ( bValid ) {
+						//update data table
+						$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
+						$( this ).dialog( "close" );
+					}
+					
 					
 				});
 				
+				$( "#onboardsub" )
+				.click(function() {
+					// write to data table
+					//alert("onboard sub");
+					var title = $("#title"),
+					requestdBy1 = $("#requestdBy1"),
+					notescountdown = $("#notescountdown"),
+					allFields = $( [] ).add( title ).add( requestdBy1 ).add( notescountdown );
+				   allFields.removeClass( "ui-state-error" );
+					var bValid = true;
+					bValid = bValid && checkLength( title, "title", 3, 30 );
+					bValid = bValid && checkLength( requestdBy1, "requestdBy1", 7, 80 );
+					bValid = bValid && checkLength( notescountdown, "notescountdown", 3, 1000 );
+					//alert(bValid);
+					if ( bValid ) {
+						//update data table
+						$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
+						//$( "#onboardForm" ).dialog( "close" );
+					}
+					
+				});
+				
+				$( "#cancelsub" )
+				.click(function() {
+					// write to data table
+					//alert("cancel sub");
+					$( "#onboardForm" ).dialog( "close" );
+					
+				});
+				
+				 
+				
         });
         
-       
+        function checkLength( o, n, min, max ) {
+    		if ( o.val().length > max || o.val().length < min ) {
+    			o.addClass( "ui-state-error" );
+    			updateTips( "Length of " + n + " must be between " +
+    				min + " and " + max + "." );
+    			return false;
+    		} else {
+    			return true;
+    		}
+    	}
         
     </script>
 </head>
@@ -263,7 +330,7 @@
                     <div style="position:relative; top:-30px; text-align:center;">
                         <ul id="mainMenu" style="margin-left:-50px">
                             <li>
-                                <a href=""><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
+                                <a href="#"><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
                             </li>
                             <li>
                                 <a href=""><img width="130px" src="./Portal_files/modify-request-new.png" class=""></a>
@@ -758,14 +825,16 @@
             <fieldset>
             <span id="reqstatus"></span>
                 <label for="title">Title</label> <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all"> <br/>
-                <label for="RequestedBy">Requested By</label> <input type="text" name="requestdBy" id="requestdBy" value="" class="text ui-widget-content ui-corner-all"> <br/>
+                <label for="RequestedBy">Requested By</label> <input type="text" name="requestdBy" id="requestdBy1" value="" class="text ui-widget-content ui-corner-all"> <br/>
                 
                 
                 <div class="countdown">
                     You have <input readonly="readonly" type="text" id="notescountdown" size="4" value="1000"> characters out of 1000 left.
                 </div>
                 <textarea id="notes" name="content" rows="5"></textarea><br/>
-                <input type="button" id="submitonboard" value="submit">
+                <div class="ui-dialog-buttonset"><button type="button" id="onboardsub" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
+                <span class="ui-button-text">Submit</span></button><button id="cancelsub" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button"><span class="ui-button-text">Close</span></button></div>
             </fieldset>
             
         </form>
@@ -786,6 +855,8 @@
                     role="button"><span class="ui-button-text">Cancel</span></button></div>
         </div>
     </div>
+    
+    
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-browser-check-modal" style="display: none; z-index: 1000; outline: 0px;">
         <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-browser-check-modal">Please Note</span><a href="" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div>
         <div id="browser-check-modal" class="ui-dialog-content ui-widget-content">
