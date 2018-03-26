@@ -242,8 +242,8 @@
 				.click(function() {
 					// write to data table
 					//alert("onboard sub");
-					var title = $("#title").val(),
-					requestedBy1 = $("#requestedBy1").val(),
+					var title = $("#title"),
+					requestedBy1 = $("#requestedBy1"),
 					//notescountdown = $("#notescountdown"),
 					allFields = $( [] ).add( title ).add( requestedBy1 );
 				   allFields.removeClass( "ui-state-error" );
@@ -276,8 +276,8 @@
 						var t = $('#summaryTable').DataTable();
 						t.row.add( [
 							Quote,
-							title,
-							requestedBy1,
+							title.val(),
+							requestedBy1.val,
 							'In progress',
 							today,
 							'',
@@ -305,7 +305,7 @@
         });
         
         function checkLength( o, n, min, max ) {
-    		if ( o.length > max || o.length < min ) {
+    		if ( o.val().length > max || o.val().length < min ) {
     			o.addClass( "ui-state-error" );
     			updateTips( "Length of " + n + " must be between " +
     				min + " and " + max + "." );
