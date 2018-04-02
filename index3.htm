@@ -108,7 +108,7 @@
     </script>
     <script type="text/javascript">
         $(function() {
-            document.getElementById("modifyrequest").disabled = true;
+
             $("li img").hover(function() {
                 $(this).toggleClass("hoverItem");
 
@@ -184,7 +184,26 @@
                 tip: ".originDateTip"
             });
 
+            $("#modifyRequest").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".disabletip"
+            });
 
+            $("#offboardRequest").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".disabletip"
+            });
+
+            $("#myRequest").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".disabletip"
+            });
 
             $("#onboardForm").dialog({
                 autoOpen: false,
@@ -377,10 +396,10 @@
                                 <img width="130px" id="modifyrequest" src="./Portal_files/modify-request-new.png" class="">
                             </li>
                             <li>
-                                <img width="130px" src="./Portal_files/offboard-request-new.png" class="">
+                                <img width="130px" id="offboardrequest" src="./Portal_files/offboard-request-new.png" class="">
                             </li>
                             <li>
-                                <img width="130px" src="./Portal_files/myrequests-new.png" class="">
+                                <img width="130px" id="myrequest" src="./Portal_files/myrequests-new.png" class="">
                             </li>
                             <!--  <li><a href="createNewSoftwareRequest.do"><img width="130px" src="resources/images/add_software_button.png"></a></li>-->
                         </ul>
@@ -780,9 +799,14 @@
         <br><br>Contact us for more info.
     </div>
 
+
     <div class="quoteTip">
         Request identification number
         <br>Use this ID in all communications for support
+    </div>
+
+    <div class="disabletip">
+        diabled
     </div>
 
     <div class="userTip">
