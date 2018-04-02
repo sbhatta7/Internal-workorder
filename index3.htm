@@ -13,7 +13,7 @@
     <link type="text/css" href="./Portal_files/eup.css" rel="stylesheet">
     <link type="text/css" href="./Portal_files/formData.css" rel="stylesheet">
     <link type="text/css" href="./Portal_files/request.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.min.css" />
 
 
     <!-- Splash overwrites some of the CSS from eup.css for the home page -->
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="./Portal_files/jquery-ui-1.8.14.custom.min.js"></script>
     <script type="text/javascript" src="./Portal_files/jquery.tools.min.js"></script>
     <script type="text/javascript" src="./Portal_files/help.js"></script>
-	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 
     <!--script type="text/javascript" src="./Portal_files/jquery.dataTables.js"></script-->
     <script type="text/javascript" src="./Portal_files/requestDataTables.js"></script>
@@ -39,24 +39,27 @@
                     }
                 });
             });
-			
-			//Calls Sorting Function
-			$('#summaryTable').DataTable( {
-				"ajax": 'data.txt',
-				"columnDefs": [
-				{
-					"data": null,
-					"defaultContent": "<a title=\"Copy Request\"><img src=\"./Portal_files/copy.png\"></a>&nbsp;<a title=\"Print Request\" target=\"_blank\"><img src=\"./Portal_files/print_icon.png\"></a>&nbsp;<a title=\"Sub Request History\" target=\"_blank\"><img src=\"./Portal_files/history_folder.png\"></a>",
-					"targets": -1
-				}
-				],
-				"order": [[ 4, "asc" ]],
-				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-				"scrollY":        "450px",
-				"scrollCollapse": true
-			} );
-			
-			
+
+            //Calls Sorting Function
+            $('#summaryTable').DataTable({
+                "ajax": 'data.txt',
+                "columnDefs": [{
+                    "data": null,
+                    "defaultContent": "<a title=\"Copy Request\"><img src=\"./Portal_files/copy.png\"></a>&nbsp;<a title=\"Print Request\" target=\"_blank\"><img src=\"./Portal_files/print_icon.png\"></a>&nbsp;<a title=\"Sub Request History\" target=\"_blank\"><img src=\"./Portal_files/history_folder.png\"></a>",
+                    "targets": -1
+                }],
+                "order": [
+                    [4, "asc"]
+                ],
+                "lengthMenu": [
+                    [10, 25, 50, -1],
+                    [10, 25, 50, "All"]
+                ],
+                "scrollY": "450px",
+                "scrollCollapse": true
+            });
+
+
         });
 
         function loadTab(tabindex) {
@@ -124,7 +127,7 @@
                     $("#hideSummaryTable").val("Hide");
                 }
             });
-			
+
 
             $("#tipStatus").tooltip({
                 position: "top right",
@@ -132,189 +135,188 @@
                 effect: "fade",
                 tip: ".statusTip"
             });
-			
-			$("#tipTarget").tooltip({
+
+            $("#tipTarget").tooltip({
                 position: "top left",
                 offset: [0, 5],
                 effect: "fade",
                 tip: ".targetDateTip"
             });
-			
-			$("#tipTitle").tooltip({
+
+            $("#tipTitle").tooltip({
                 position: "top left",
                 offset: [0, 5],
                 effect: "fade",
                 tip: ".titleTip"
             });
-			
-			$("#tipNotes").tooltip({
+
+            $("#tipNotes").tooltip({
                 position: "top left",
                 offset: [0, 5],
                 effect: "fade",
                 tip: ".notesTip"
             });
-			
-			$("#contact").tooltip({
+
+            $("#contact").tooltip({
                 position: "bottom right",
                 offset: [5, 5],
                 effect: "fade"
             });
-			
-			$("#tipQuote").tooltip({
+
+            $("#tipQuote").tooltip({
                 position: "top left",
                 offset: [0, 5],
                 effect: "fade",
-				tip: ".quoteTip"
+                tip: ".quoteTip"
             });
-			
-			$("#tipUser").tooltip({
+
+            $("#tipUser").tooltip({
                 position: "top left",
                 offset: [0, 5],
                 effect: "fade",
-				tip: ".userTip"
+                tip: ".userTip"
             });
-			
-			$("#tipDate").tooltip({
+
+            $("#tipDate").tooltip({
                 position: "top left",
                 offset: [0, 5],
                 effect: "fade",
-				tip: ".originDateTip"
+                tip: ".originDateTip"
             });
-			
-			
-			
-			 $( "#onboardForm" ).dialog({
-					autoOpen: false,
-					height: 300,
-					width: 500,
-					modal: true	,
-					Cancel: function() {
-						alert("cancel");
-						$( this ).dialog( "close" );
-					},
-					/*open: function() {
-						//alert("open");
-						//$("#requestdBy1").val($("#sessionUserName").val());
-						//$("#helpEmail").val($("#sessionUserEmail").val());
-					},*/
-					close: function() {
-						//alert("close");
-						//allFields.val( "" ).removeClass( "ui-state-error" );
-						$("#countdown").val("1000");
-						//$('#helpSubject option:first').prop("selected", true);
-					}
-				});
-	    
-	    $( "#onboardreq" )
-			.click(function() {
-				//alert("hi");
-				$( "#onboardForm" ).dialog( "open" );
-			});
-			 
-			 /*$("#notes").keydown(function() {
+
+
+
+            $("#onboardForm").dialog({
+                autoOpen: false,
+                height: 300,
+                width: 500,
+                modal: true,
+                Cancel: function() {
+                    alert("cancel");
+                    $(this).dialog("close");
+                },
+                /*open: function() {
+                	//alert("open");
+                	//$("#requestdBy1").val($("#sessionUserName").val());
+                	//$("#helpEmail").val($("#sessionUserEmail").val());
+                },*/
+                close: function() {
+                    //alert("close");
+                    //allFields.val( "" ).removeClass( "ui-state-error" );
+                    $("#countdown").val("1000");
+                    //$('#helpSubject option:first').prop("selected", true);
+                }
+            });
+
+            $("#onboardreq")
+                .click(function() {
+                    //alert("hi");
+                    $("#onboardForm").dialog("open");
+                });
+
+            /*$("#notes").keydown(function() {
 					limitText(this,1000, $("#notescountdown"));
 				});
 				
 				$("#notes").keyup(function() {
 					limitText(this,1000, $("#notescountdown"));
 				});*/
-				
-				
-				$( "#submitonboard" )
-				.click(function() {
-					// write to data table
-					//alert("submitted");
-					var bValid = true;
-					bValid = bValid && checkLength( name, "title", 3, 30 );
-					bValid = bValid && checkLength( email, "requestdBy1", 7, 80 );
-					//bValid = bValid && checkLength( content, "notescountdown", 1, 1000 );
-					alert(bValid);
-					if ( bValid ) {
-						//update data table
-						$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
-						$( this ).dialog( "close" );
-					}
-					
-					
-				});
-				
-				$( "#onboardsub" )
-				.click(function() {
-					// write to data table
-					//alert("onboard sub");
-					var title = $("#title").val(),
-					requestedBy1 = $("#requestedBy1").val(),
-					//notescountdown = $("#notescountdown"),
-					allFields = $( [] ).add( title ).add( requestedBy1 );
-				   allFields.removeClass( "ui-state-error" );
-					var bValid = true;
-					//bValid = bValid && checkLength( title, "title", 3, 30 );
-					//bValid = bValid && checkLength( requestedBy1, "requestedBy1", 7, 80 );
-					//bValid = bValid && checkLength( notescountdown, "notescountdown", 3, 1000 );
-					//alert(bValid);
-					if ( bValid ) {
-						//update data table
-						var Quote = 'Q' + Math.round(Math.random() * (999 - 111 + 1)) + 111;
-						
-						//Generating today's date in format for DataTables
-						var today = new Date();
-						var dd = today.getDate();
-						var mm = today.getMonth()+1; //January is 0!
-						var yyyy = today.getFullYear();
 
-						if(dd<10) {
-							dd = '0'+dd
-						} 
 
-						if(mm<10) {
-							mm = '0'+mm
-						} 
+            $("#submitonboard")
+                .click(function() {
+                    // write to data table
+                    //alert("submitted");
+                    var bValid = true;
+                    bValid = bValid && checkLength(name, "title", 3, 30);
+                    bValid = bValid && checkLength(email, "requestdBy1", 7, 80);
+                    //bValid = bValid && checkLength( content, "notescountdown", 1, 1000 );
+                    alert(bValid);
+                    if (bValid) {
+                        //update data table
+                        $("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
+                        $(this).dialog("close");
+                    }
 
-						today = yyyy + '/' + mm + '/' + dd;
-						
-						//Add row to Table
-						var t = $('#summaryTable').DataTable();
-						t.row.add( [
-							Quote,
-							title,
-							requestedBy1,
-							'In progress',
-							today,
-							'',
-							''
-						] ).draw( true );
-						$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
-						$('#onboardForm')[0].reset();
-						//$( "#onboardForm" ).dialog( "close" );
-					}
-					
-				});
-				
-				$( "#cancelsub" )
-				.click(function() {
-					// write to data table
-					//alert("cancel sub");
-					$('#onboardForm')[0].reset();
-					$("#reqstatus").addClass("ui-state-error").html("");
-					$( "#onboardForm" ).dialog( "close" );
-					
-				});
-				
-				 
-				
+
+                });
+
+            $("#onboardsub")
+                .click(function() {
+                    // write to data table
+                    //alert("onboard sub");
+                    var title = $("#title").val(),
+                        requestedBy1 = $("#requestedBy1").val(),
+                        //notescountdown = $("#notescountdown"),
+                        allFields = $([]).add(title).add(requestedBy1);
+                    allFields.removeClass("ui-state-error");
+                    var bValid = true;
+                    //bValid = bValid && checkLength( title, "title", 3, 30 );
+                    //bValid = bValid && checkLength( requestedBy1, "requestedBy1", 7, 80 );
+                    //bValid = bValid && checkLength( notescountdown, "notescountdown", 3, 1000 );
+                    //alert(bValid);
+                    if (bValid) {
+                        //update data table
+                        var Quote = 'Q' + Math.round(Math.random() * (999 - 111 + 1)) + 111;
+
+                        //Generating today's date in format for DataTables
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth() + 1; //January is 0!
+                        var yyyy = today.getFullYear();
+
+                        if (dd < 10) {
+                            dd = '0' + dd
+                        }
+
+                        if (mm < 10) {
+                            mm = '0' + mm
+                        }
+
+                        today = yyyy + '/' + mm + '/' + dd;
+
+                        //Add row to Table
+                        var t = $('#summaryTable').DataTable();
+                        t.row.add([
+                            Quote,
+                            title,
+                            requestedBy1,
+                            'In progress',
+                            today,
+                            '',
+                            ''
+                        ]).draw(true);
+                        $("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
+                        $('#onboardForm')[0].reset();
+                        //$( "#onboardForm" ).dialog( "close" );
+                    }
+
+                });
+
+            $("#cancelsub")
+                .click(function() {
+                    // write to data table
+                    //alert("cancel sub");
+                    $('#onboardForm')[0].reset();
+                    $("#reqstatus").addClass("ui-state-error").html("");
+                    $("#onboardForm").dialog("close");
+
+                });
+
+
+
         });
-        
-        function checkLength( o, n, min, max ) {
-    		if ( o.length > max || o.length < min ) {
-    			o.addClass( "ui-state-error" );
-    			updateTips( "Length of " + n + " must be between " +
-    				min + " and " + max + "." );
-    			return false;
-    		} else {
-    			return true;
-    		}
-    	}
-        
+
+        function checkLength(o, n, min, max) {
+            if (o.length > max || o.length < min) {
+                o.addClass("ui-state-error");
+                updateTips("Length of " + n + " must be between " +
+                    min + " and " + max + ".");
+                return false;
+            } else {
+                return true;
+            }
+        }
     </script>
 </head>
 
@@ -365,13 +367,13 @@
                                 <a href="#"><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
                             </li>
                             <li>
-                                <a href=""><img width="130px" src="./Portal_files/modify-request-new.png" class=""></a>
+                                <img width="130px" src="./Portal_files/modify-request-new.png" class="">
                             </li>
                             <li>
-                                <a href=""><img width="130px" src="./Portal_files/offboard-request-new.png" class=""></a>
+                                <img width="130px" src="./Portal_files/offboard-request-new.png" class="">
                             </li>
                             <li>
-                                <a href=""><img width="130px" src="./Portal_files/myrequests-new.png" class=""></a>
+                                <img width="130px" src="./Portal_files/myrequests-new.png" class="">
                             </li>
                             <!--  <li><a href="createNewSoftwareRequest.do"><img width="130px" src="resources/images/add_software_button.png"></a></li>-->
                         </ul>
@@ -393,7 +395,7 @@
                                 <div>
                                     <!-- start data table div -->
                                     <div class="dataTables_wrapper" id="summaryTable_wrapper" style="height:600px;">
-                                        <table class="display requestTable" id="summaryTable" >
+                                        <table class="display requestTable" id="summaryTable">
                                             <thead>
                                                 <tr class="requestHeader">
                                                     <th class="ui-state-default" rowspan="1" colspan="1" style="width: 66.0208px;">
@@ -676,15 +678,13 @@
                             <a href="http://gmu.edu" target="_blank"><img src="./Portal_files/mason-logo.png" alt="George Mason University"></a>
                         </div>
                         <div class="social-media-and-copyright">
-                            
-                            
+
+
                             <div style="display:inline-block">
                                 <p> 2018 George Mason University. 4400 University Drive, Fairfax, Virginia 22030</p>
-                                <p> <a href="https://itservices.gmu.edu/" target="_blank"> ITS Support Center</a> | 703-993-8870 | <a href="mailTo:support@gmu.edu">support@gmu.edu</a> | <a href="http://info.gmu.edu/skype.html" target="_blank"> Contact via Skype</a> |<a href="https://itservices.gmu.edu/services/help-support.cfm" target="_blank" title="Help and Support">Help and Support</a> | <a href="https://itservices.gmu.edu/alerts/"
-                                        target="_blank" title="Alerts and Links">Alerts & Outages</a> | <a href="https://itservices.gmu.edu/forms/" target="_blank" title="Link to Forms">Forms</a> | <a href="http://webdev.gmu.edu/internet-privacy/"
-                                        target="_blank" title="Link to Privacy Statement">Privacy Statement</a> | <a href="https://www2.gmu.edu/about-mason/freedom-information-act-requests" target="_blank">FOIA</a></p>
+                                <p> <a href="https://itservices.gmu.edu/" target="_blank"> ITS Support Center</a> | 703-993-8870 | <a href="mailTo:support@gmu.edu">support@gmu.edu</a> | <a href="http://info.gmu.edu/skype.html" target="_blank"> Contact via Skype</a>                                    |<a href="https://itservices.gmu.edu/services/help-support.cfm" target="_blank" title="Help and Support">Help and Support</a> | <a href="https://itservices.gmu.edu/alerts/" target="_blank" title="Alerts and Links">Alerts & Outages</a>                                    | <a href="https://itservices.gmu.edu/forms/" target="_blank" title="Link to Forms">Forms</a> | <a href="http://webdev.gmu.edu/internet-privacy/" target="_blank" title="Link to Privacy Statement">Privacy Statement</a>                                    | <a href="https://www2.gmu.edu/about-mason/freedom-information-act-requests" target="_blank">FOIA</a></p>
                             </div>
-                            
+
                         </div>
 
 
@@ -741,47 +741,47 @@
         <br><b>Submitted</b> - The request has been submitted successfully to the Work Order Team and is in the process of being reviewed.
         <br><br>Barring any problems or need for additional information from you, the request will be assigned to a provisioner within 24 hours of submission.
     </div>
-	
-	<div class="targetDateTip">
-		Requests have different expected completion times based on type.
-		<br><b>Hardware</b> - This request takes 1 to 10 days.
-		<br><b>Software</b> - This request takes 1 to 5 days.
-		<br><b>Phone Service</b> - This request takes 1 to 7 days.
-		<br><br>Contact us if your request is taking longer than normal.
-	</div>
-	
-	<div class="originDateTip">
-		Date user request was received.<br>
-		<br>Estimate delivery date based on:
-		<br><b>Hardware</b> - This request takes 1 to 10 days.
-		<br><b>Software</b> - This request takes 1 to 5 days.
-		<br><b>Phone Service</b> - This request takes 1 to 7 days.
-		<br><br>Contact us if your request is taking longer than normal.
-	</div>
-	
-	<div class="titleTip">
-		Requests have different types:
-		<br><b>* H: Hardware</b> - New computer or accessory.
-		<br><b>* S: Software</b>
-		<br><b>* P: Phone Service</b> - Connect phone service to new location.
-		<br><br>Contact us for more info.
-	</div>
-	
-	<div class="notesTip">
-		Brief Special Instructions, Modifications, or Cancellation 
-		<br>reason will be listed here.
-		<br><br>Contact us for more info.
-	</div>
-	
-	<div class="quoteTip">
-		Request identification number
-		<br>Use this ID in all communications for support
-	</div>
-	
-	<div class="userTip">
-		User making request
-	</div>
-	
+
+    <div class="targetDateTip">
+        Requests have different expected completion times based on type.
+        <br><b>Hardware</b> - This request takes 1 to 10 days.
+        <br><b>Software</b> - This request takes 1 to 5 days.
+        <br><b>Phone Service</b> - This request takes 1 to 7 days.
+        <br><br>Contact us if your request is taking longer than normal.
+    </div>
+
+    <div class="originDateTip">
+        Date user request was received.<br>
+        <br>Estimate delivery date based on:
+        <br><b>Hardware</b> - This request takes 1 to 10 days.
+        <br><b>Software</b> - This request takes 1 to 5 days.
+        <br><b>Phone Service</b> - This request takes 1 to 7 days.
+        <br><br>Contact us if your request is taking longer than normal.
+    </div>
+
+    <div class="titleTip">
+        Requests have different types:
+        <br><b>* H: Hardware</b> - New computer or accessory.
+        <br><b>* S: Software</b>
+        <br><b>* P: Phone Service</b> - Connect phone service to new location.
+        <br><br>Contact us for more info.
+    </div>
+
+    <div class="notesTip">
+        Brief Special Instructions, Modifications, or Cancellation
+        <br>reason will be listed here.
+        <br><br>Contact us for more info.
+    </div>
+
+    <div class="quoteTip">
+        Request identification number
+        <br>Use this ID in all communications for support
+    </div>
+
+    <div class="userTip">
+        User making request
+    </div>
+
     <div class="addVdiPreDefPersonaTip">
         <b>Task worker</b> - User has limited privileges in OS. No ability to install applications or device drivers. Session will run few applications in total and a limited number of applications concurrently. User persona is redirected outside of the
         OS. Users will have limited session persistence, in the event of a session disconnect or when moving from one endpoint to another.
@@ -806,10 +806,10 @@
         <br><b>VDI Applications</b> - Removes an application from your Virtual Desktop.
         <br>NOTE: "Core" Applications common to all desktops cannot be removed.
     </div>
- 
- 
 
- 
+
+
+
 
 
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-helpForm" style="display: none; z-index: 1000; outline: 0px; position: absolute;">
@@ -836,7 +836,7 @@
                 <label for="helpLinks">Help Links</label>
                 <ul id="helpLinks">
                     <li>
-                        <a href="javascript:window.alert('The page development is in progress')"  class="links">
+                        <a href="javascript:window.alert('The page development is in progress')" class="links">
                             <font color="blue">Frequently Asked Questions</font>
                         </a>
                     </li>
@@ -851,29 +851,28 @@
             <!-- RFC C00599857 -- 1/25/2012 -- END -->
         </form>
         <!-- Onboard request start -->
-        
+
         <form id="onboardForm" style="" class="ui-dialog-content ui-widget-content">
             <p class="validateTips">All form fields are required.</p>
             <fieldset>
-            <span id="reqstatus"></span>
+                <span id="reqstatus"></span>
                 <label for="title">Title</label> <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all"> <br/>
                 <label for="RequestedBy">Requested By</label> <input type="text" name="requestdBy" id="requestedBy1" value="" class="text ui-widget-content ui-corner-all"> <br/>
-                
-                
+
+
                 <!--div class="countdown">
                     You have <input readonly="readonly" type="text" id="notescountdown" size="4" value="1000"> characters out of 1000 left.
                 </div>
                 <textarea id="notes" name="content" rows="5"></textarea--><br/>
                 <div class="ui-dialog-buttonset"><button type="button" id="onboardsub" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
-                <span class="ui-button-text">Submit</span></button><button id="cancelsub" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
-                    role="button"><span class="ui-button-text">Close</span></button></div>
+                <span class="ui-button-text">Submit</span></button><button id="cancelsub" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Close</span></button></div>
             </fieldset>
-            
+
         </form>
-        
+
         <!-- onboard request end -->
-        
-        
+
+
         <div class="ui-resizable-handle ui-resizable-n"></div>
         <div class="ui-resizable-handle ui-resizable-e"></div>
         <div class="ui-resizable-handle ui-resizable-s"></div>
@@ -887,8 +886,8 @@
                     role="button"><span class="ui-button-text">Cancel</span></button></div>
         </div>
     </div>
-    
-    
+
+
     <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-browser-check-modal" style="display: none; z-index: 1000; outline: 0px;">
         <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-browser-check-modal">Please Note</span><a href="" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div>
         <div id="browser-check-modal" class="ui-dialog-content ui-widget-content">
