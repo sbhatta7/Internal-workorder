@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+    <title>IT Work Order Request Portal</title>
+
+    <link type="text/css" href="./Portal_files/demo_page.css" rel="stylesheet">
+    <link type="text/css" href="./Portal_files/demo_table_jui.css" rel="stylesheet">
+    <link type="text/css" href="./Portal_files/jquery-ui-1.8.4.custom.css" rel="stylesheet">
+    <link type="text/css" href="./Portal_files/eup.css" rel="stylesheet">
+    <link type="text/css" href="./Portal_files/formData.css" rel="stylesheet">
+    <link type="text/css" href="./Portal_files/request.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/datatables.min.css"/>
+
+
+    <!-- Splash overwrites some of the CSS from eup.css for the home page -->
+    <link type="text/css" href="./Portal_files/eupSplash.css" rel="stylesheet">
+
+    <script type="text/javascript" src="./Portal_files/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="./Portal_files/jquery-ui-1.8.14.custom.min.js"></script>
+    <script type="text/javascript" src="./Portal_files/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="./Portal_files/help.js"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+
+    <!--script type="text/javascript" src="./Portal_files/jquery.dataTables.js"></script-->
+    <script type="text/javascript" src="./Portal_files/requestDataTables.js"></script>
+    <script type="text/javascript" src="./Portal_files/browser-check.js" defer=""></script>
+    <script type="text/javascript" src="./Portal_files/home.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+                var $tabs = $("#tabs").tabs({
+                    select: function(e, ui) {
+                        var thistab = ui;
+                        loadTab(thistab.index);
+                    }
+                });
+            });
+			
+			//Calls Sorting Function
+			$('#summaryTable').DataTable( {
+				"ajax": 'data.txt',
+				"columnDefs": [
+				{
+					"data": null,
+					"defaultContent": "<a title=\"Copy Request\"><img src=\"./Portal_files/copy.png\"></a>&nbsp;<a title=\"Print Request\" target=\"_blank\"><img src=\"./Portal_files/print_icon.png\"></a>&nbsp;<a title=\"Sub Request History\" target=\"_blank\"><img src=\"./Portal_files/history_folder.png\"></a>",
+					"targets": -1
+				}
+				],
+				"order": [[ 4, "asc" ]],
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+				"scrollY":        "450px",
+				"scrollCollapse": true
+			} );
+			
+			
+        });
+
+        function loadTab(tabindex) {
+            switch (tabindex) {
+                case 0:
+                    //custom plugin in requestDataTables.js
+                    eup.setupRequests({
+                        eid: "asw",
+                        displayLength: 5,
+                        bInfo: false,
+                        bSort: false,
+                        bFilter: false,
+                        newSort: [
+                            [9, "asc"],
+                            [10, "desc"]
+                        ],
+                        sDom: 't'
+                    });
+                    break;
+
+                case 1:
+                    eup.setupApprovals({
+                        eid: "asw",
+                        displayLength: 5,
+                        bInfo: false,
+                        bSort: false,
+                        bFilter: false,
+                        newSort: [
+                            [9, "asc"]
+                        ],
+                        sDom: 't'
+                    });
+                    break;
+                case 2:
+                    eup.setupSoftware({
+                        eid: "asw",
+                        displayLength: 5,
+                        bInfo: false,
+                        bSort: false,
+                        bFilter: false,
+                        sDom: 't'
+                    });
+                    break;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $(function() {
+
+            $("li img").hover(function() {
+                $(this).toggleClass("hoverItem");
+
+            });
+
+            $(".ui-toolbar").addClass("noBackgroundOrBorder");
+            loadTab(0);
+            $("#hideSummaryTable").click(function() {
+                if ($("#hideSummaryTable").val() == "Hide") {
+                    $('#summaryTable').hide();
+                    $("#hideSummaryTable").width("165px");
+                    $("#hideSummaryTable").val("Show Recent Requests");
+                } else {
+                    $('#summaryTable').show();
+                    $("#hideSummaryTable").width("50px");
+                    $("#hideSummaryTable").val("Hide");
+                }
+            });
+			
+
+            $("#tipStatus").tooltip({
+                position: "top right",
+                offset: [5, 10],
+                effect: "fade",
+                tip: ".statusTip"
+            });
+			
+			$("#tipTarget").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".targetDateTip"
+            });
+			
+			$("#tipTitle").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".titleTip"
+            });
+			
+			$("#tipNotes").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+                tip: ".notesTip"
+            });
+			
+			$("#contact").tooltip({
+                position: "bottom right",
+                offset: [5, 5],
+                effect: "fade"
+            });
+			
+			$("#tipQuote").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+				tip: ".quoteTip"
+            });
+			
+			$("#tipUser").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+				tip: ".userTip"
+            });
+			
+			$("#tipDate").tooltip({
+                position: "top left",
+                offset: [0, 5],
+                effect: "fade",
+				tip: ".originDateTip"
+            });
+			
+			
+			
+			 $( "#onboardForm" ).dialog({
+					autoOpen: false,
+					height: 300,
+					width: 500,
+					modal: true	,
+					Cancel: function() {
+						alert("cancel");
+						$( this ).dialog( "close" );
+					},
+					/*open: function() {
+						//alert("open");
+						//$("#requestdBy1").val($("#sessionUserName").val());
+						//$("#helpEmail").val($("#sessionUserEmail").val());
+					},*/
+					close: function() {
+						//alert("close");
+						//allFields.val( "" ).removeClass( "ui-state-error" );
+						$("#countdown").val("1000");
+						//$('#helpSubject option:first').prop("selected", true);
+					}
+				});
+	    
+	    $( "#onboardreq" )
+			.click(function() {
+				//alert("hi");
+				$( "#onboardForm" ).dialog( "open" );
+			});
+			 
+			 /*$("#notes").keydown(function() {
+					limitText(this,1000, $("#notescountdown"));
+				});
+				
+				$("#notes").keyup(function() {
+					limitText(this,1000, $("#notescountdown"));
+				});*/
+				
+				
+				$( "#submitonboard" )
+				.click(function() {
+					// write to data table
+					//alert("submitted");
+					var bValid = true;
+					bValid = bValid && checkLength( name, "title", 3, 30 );
+					bValid = bValid && checkLength( email, "requestdBy1", 7, 80 );
+					//bValid = bValid && checkLength( content, "notescountdown", 1, 1000 );
+					alert(bValid);
+					if ( bValid ) {
+						//update data table
+						$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
+						$( this ).dialog( "close" );
+					}
+					
+					
+				});
+				
+				$( "#onboardsub" )
+				.click(function() {
+					// write to data table
+					//alert("onboard sub");
+					var title = $("#title").val(),
+					requestedBy1 = $("#requestedBy1").val(),
+					//notescountdown = $("#notescountdown"),
+					allFields = $( [] ).add( title ).add( requestedBy1 );
+				   allFields.removeClass( "ui-state-error" );
+					var bValid = true;
+					//bValid = bValid && checkLength( title, "title", 3, 30 );
+					//bValid = bValid && checkLength( requestedBy1, "requestedBy1", 7, 80 );
+					//bValid = bValid && checkLength( notescountdown, "notescountdown", 3, 1000 );
+					//alert(bValid);
+					if ( bValid ) {
+						//update data table
+						var Quote = 'Q' + Math.round(Math.random() * (999 - 111 + 1)) + 111;
+						
+						//Generating today's date in format for DataTables
+						var today = new Date();
+						var dd = today.getDate();
+						var mm = today.getMonth()+1; //January is 0!
+						var yyyy = today.getFullYear();
+
+						if(dd<10) {
+							dd = '0'+dd
+						} 
+
+						if(mm<10) {
+							mm = '0'+mm
+						} 
+
+						today = yyyy + '/' + mm + '/' + dd;
+						
+						//Add row to Table
+						var t = $('#summaryTable').DataTable();
+						t.row.add( [
+							Quote,
+							title,
+							requestedBy1,
+							'In progress',
+							today,
+							'',
+							''
+						] ).draw( true );
+						$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
+						$('#onboardForm')[0].reset();
+						//$( "#onboardForm" ).dialog( "close" );
+					}
+					
+				});
+				
+				$( "#cancelsub" )
+				.click(function() {
+					// write to data table
+					//alert("cancel sub");
+					$('#onboardForm')[0].reset();
+					$("#reqstatus").addClass("ui-state-error").html("");
+					$( "#onboardForm" ).dialog( "close" );
+					
+				});
+				
+				 
+				
+        });
+        
+        function checkLength( o, n, min, max ) {
+    		if ( o.length > max || o.length < min ) {
+    			o.addClass( "ui-state-error" );
+    			updateTips( "Length of " + n + " must be between " +
+    				min + " and " + max + "." );
+    			return false;
+    		} else {
+    			return true;
+    		}
+    	}
+        
+    </script>
+</head>
+
+<body>
+    <input type="hidden" value="Saurav Bhattacharyya" id="sessionUserName">
+    <input type="hidden" value="sbhatta7@gmu.edu" id="sessionUserEmail">
+    <div id="centerWrapper">
+        <div id="centerContainer">
+
+            <div id="mainpage">
+                <div id="maincontent">
+                    <div id="gradiant_left"></div>
+                    <div id="gradiant_right"></div>
+
+                    <div id="header">
+                        <div id="logo">
+                            <a href="http://gmu.edu" target="_blank"><img src="./Portal_files/mason-logo.png"></a>
+                        </div>
+                        <div class="btnHome">
+                            <a href="">Home</a>
+                        </div>
+                        <div class="btnHelp" id="contact" title="Contact us">
+                            <span>Contact Us</span>
+                        </div>
+
+                        <!--<div id="loggedIn" style="position: absolute; top: 40px; right: 0px; text-align: right; padding-bottom: 0px; padding-left: 0px; padding-right: 10px; color: #ffffff; padding-top: 0px;">
+						Logged in user: Saurav Bhattacharyya
+					</div>-->
+                    </div>
+
+                    <div class="mainTitle">
+                        <h2 style="margin:0px;">Welcome to the IT Work Order Request Portal</h2>
+                    </div>
+
+                    <!-- remove below banner
+				<div id="newFeatureBanner" style="position:relative;top:-35px; padding:0px 10px;align:center;">
+	<div style="color: white; border:3px solid; border-color: yellow; font-weight: bold; font-size: 16px; text-align:center">
+		<div style="padding: 5px;">NOTE: The IT Work Order Request portal has been updated!  For details, please click "WHAT'S NEW" button above.</div>
+	</div>
+</div>
+				-->
+
+                    <!-- home page buttons-->
+
+                    <div style="position:relative; top:-30px; text-align:center;">
+                        <ul id="mainMenu" style="margin-left:-50px">
+                            <li>
+                                <a href="#"><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
+                            </li>
+                            <li>
+                                <a href=""><img width="130px" src="./Portal_files/modify-request-new.png" class=""></a>
+                            </li>
+                            <li>
+                                <a href=""><img width="130px" src="./Portal_files/offboard-request-new.png" class=""></a>
+                            </li>
+                            <li>
+                                <a href=""><img width="130px" src="./Portal_files/myrequests-new.png" class=""></a>
+                            </li>
+                            <!--  <li><a href="createNewSoftwareRequest.do"><img width="130px" src="resources/images/add_software_button.png"></a></li>-->
+                        </ul>
+                    </div>
+
+
+
+
+
+                    <!-- end home page buttons -->
+                    <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all noBackgroundOrBorder" style="width: 1200px;">
+                        <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all noBackgroundOrBorder">
+                            <li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="Portal.htm">Requests</a></li>
+                            <!--li class="ui-state-default ui-corner-top"><a href="index.htm">Pending Approvals</a></li>
+                            <li class="ui-state-default ui-corner-top"><a href="index.htm">Software Requests</a></li-->
+                        </ul>
+                        <div id="tab_Requests" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+                            <div class="tabContent">
+                                <div>
+                                    <!-- start data table div -->
+                                    <div class="dataTables_wrapper" id="summaryTable_wrapper" style="height:600px;">
+                                        <table class="display requestTable" id="summaryTable" >
+                                            <thead>
+                                                <tr class="requestHeader">
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 66.0208px;">
+                                                        <div class="DataTables_sort_wrapper">Quote #<img src="./Portal_files/tooltip.png" id="tipQuote" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 108.021px;">
+                                                        <div class="DataTables_sort_wrapper">Title<img src="./Portal_files/tooltip.png" id="tipTitle" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 97.0208px;">
+                                                        <div class="DataTables_sort_wrapper">Requested By<img src="./Portal_files/tooltip.png" id="tipUser" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 78.0208px;">
+                                                        <div class="DataTables_sort_wrapper">Status <img src="./Portal_files/tooltip.png" id="tipStatus" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 105.021px;">
+                                                        <div class="DataTables_sort_wrapper">Requested Date<img src="./Portal_files/tooltip.png" id="tipDate" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 84.0208px;">
+                                                        <div class="DataTables_sort_wrapper">Target Date<img src="./Portal_files/tooltip.png" id="tipTarget" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 50.0208px;">
+                                                        <div class="DataTables_sort_wrapper">Notes<img src="./Portal_files/tooltip.png" id="tipNotes" class="tooltipImg"><span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                    <th class="ui-state-default" rowspan="1" colspan="1" style="width: 122.021px;">
+                                                        <div class="DataTables_sort_wrapper">Copy/Print/History<span class="DataTables_sort_icon"></span></div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <!--tr class="requestDefaultOdd">
+                                                    <td>Q2587311</td>
+                                                    <td>"H" MAC-TOUCH BAR</td>
+                                                    <td>Saurav Bhattacharyya/sbhatta7</td>
+                                                    <td>Complete</td>
+                                                    <td>2017/04/24</td>
+                                                    <td>2017/05/09</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a href="" class="tip-init"><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg0" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="requestDefaultEven">
+                                                    <td>Q2519971</td>
+                                                    <td>"S" Mysql workbench</td>
+                                                    <td>Saurav Bhattacharyya/sbhatta7</td>
+                                                    <td>Complete</td>
+                                                    <td>2017/01/22</td>
+                                                    <td>2017/02/07</td>
+                                                    <td>Follow first time login steps outlined in email</td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg1" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="requestDefaultOdd">
+                                                    <td>Q2392834</td>
+                                                    <td>"S" Google Chrome</td>
+                                                    <td>Saurav Bhattacharyya/sbhatta7</td>
+                                                    <td>Complete</td>
+                                                    <td>2016/07/18</td>
+                                                    <td>2016/08/02</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg2" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="requestDefaultEven">
+                                                    <td>Q2247217</td>
+                                                    <td>"S" MS office</td>
+                                                    <td>Saurav Bhattacharyya/sbhatta7</td>
+                                                    <td>Complete</td>
+                                                    <td>2016/01/13</td>
+                                                    <td>2016/01/28</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg3" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+                                                <tr class="requestDefaultOdd">
+                                                    <td>Q2046100</td>
+                                                    <td>"H" MACBook</td>
+                                                    <td>Saurav Bhattacharyya/sbhatta7</td>
+                                                    <td>Complete</td>
+                                                    <td>2015/06/11</td>
+                                                    <td>2015/06/26</td>
+                                                    <td>Please follow instructions on onboarding email.</td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q2945877</td>
+                                                    <td>"P" Phone Service</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/15</td>
+                                                    <td>Please set up voice mail</td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultOdd">
+                                                    <td>Q1485256</td>
+                                                    <td>"H" Dell XPS Touch</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/11</td>
+                                                    <td>Please follow instructions on onboarding email.</td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q3541752</td>
+                                                    <td>"S" Micrsoft Office</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/12</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultOdd">
+                                                    <td>Q3552144</td>
+                                                    <td>"S" Adobe Reader</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/12</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q3412877</td>
+                                                    <td>"S" Google Chrome</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/12</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultOdd">
+                                                    <td>Q3214589</td>
+                                                    <td>"S" MATLAB</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/13</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr>
+												<tr class="requestDefaultEven">
+                                                    <td>Q3001798</td>
+                                                    <td>"S" MSSQL Workbench</td>
+                                                    <td>Othmane Ouardi</td>
+                                                    <td>Complete</td>
+                                                    <td>2018/01/10</td>
+                                                    <td>2018/01/14</td>
+                                                    <td></td>
+                                                    <td>
+                                                        <a title="Copy Request" href=""><img src="./Portal_files/copy.png"></a>&nbsp;
+                                                        <a title="Print Request" href="" target="_blank"><img src="./Portal_files/print_icon.png"></a>&nbsp;
+                                                        <a title="Sub Request History" href="" target="_blank"><img id="historyImg4" src="./Portal_files/history_folder.png"></a>
+                                                    </td>
+                                                </tr-->
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!--div style="width: 100%; text-align: right;">
+                                        <input style="width: 50px" type="button" id="hideSummaryTable" value="Hide">&nbsp;
+                                        <!--input style="width: 50px" type="button" id="showMoreSummaryTable" value="More">
+                                    </div-->
+                                </div>
+                                <!-- end data table div -->
+                            </div>
+                        </div>
+                        <div id="tab_Approvals" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+                            <div class="tabContent">
+                                <div>
+                                    <!-- start data table div -->
+                                    <div class="dataTables_wrapper" id="approvalTable_wrapper">
+                                        <table class="display requestTable" id="approvalTable" style="width: 873px;">
+                                            <thead>
+                                                <tr class="requestHeader">
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 86px;">Sub Request ID</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 74px;">Quote #</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 77px;">Request Type</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 202px;">Title</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 82px;">Requested For</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 120px;">Submitted Date</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">Status</th>
+                                                    <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 76px;">History</th>
+                                                    <th style="display: none; width: 0px;" class="sorting_disabled" rowspan="1" colspan="1">Sequence</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr class="odd">
+                                                    <td valign="top" colspan="9" class="dataTables_empty">No data available in table</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div style="width: 100%; text-align: right;">
+                                        <input style="width: 50px" type="button" value="More" onclick="location=&#39;subRequestHistory.do&#39;">
+                                    </div>
+                                </div>
+                                <!-- end data table div -->
+                            </div>
+                        </div>
+                        <div id="tab_SwRequests" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+                            <div class="tabContent">
+                                <div>
+                                    <!-- start data table div -->
+                                    <div class="dataTables_wrapper" id="softwareRequestTable_wrapper">
+                                        <table class="display requestTable" id="softwareRequestTable" style="width: 873px;">
+                                            <thead>
+                                                <tr class="requestHeader">
+                                                    <th class="sorting" rowspan="1" colspan="1" style="width: 76px;">Quote #</th>
+                                                    <th class="sorting" rowspan="1" colspan="1" style="width: 419px;">Title</th>
+                                                    <th class="sorting" rowspan="1" colspan="1" style="width: 163px;">Product Name</th>
+                                                    <th class="sorting_desc" rowspan="1" colspan="1" style="width: 88px;">Submitted Date</th>
+                                                    <th class="sorting" rowspan="1" colspan="1" style="width: 77px;">Status</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr class="odd">
+                                                    <td valign="top" colspan="5" class="dataTables_empty">No data available in table</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div style="width: 100%; text-align: right;">
+                                        <input style="width: 50px" type="button" value="More" onclick="location=&#39;softwareRequestHistory.do&#39;">
+                                    </div>
+                                </div>
+                                <!-- end data table div -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end data table div -->
+                    <div style="height:50px" id="spacer"></div>
+                    <div class="footer">
+
+                        <div class="branding">
+                            <a href="http://gmu.edu" target="_blank"><img src="./Portal_files/mason-logo.png" alt="George Mason University"></a>
+                        </div>
+                        <div class="social-media-and-copyright">
+                            
+                            
+                            <div style="display:inline-block">
+                                <p> 2018 George Mason University. 4400 University Drive, Fairfax, Virginia 22030</p>
+                                <p> <a href="https://itservices.gmu.edu/" target="_blank"> ITS Support Center</a> | 703-993-8870 | <a href="mailTo:support@gmu.edu">support@gmu.edu</a> | <a href="http://info.gmu.edu/skype.html" target="_blank"> Contact via Skype</a> |<a href="https://itservices.gmu.edu/services/help-support.cfm" target="_blank" title="Help and Support">Help and Support</a> | <a href="https://itservices.gmu.edu/alerts/"
+                                        target="_blank" title="Alerts and Links">Alerts & Outages</a> | <a href="https://itservices.gmu.edu/forms/" target="_blank" title="Link to Forms">Forms</a> | <a href="http://webdev.gmu.edu/internet-privacy/"
+                                        target="_blank" title="Link to Privacy Statement">Privacy Statement</a> | <a href="https://www2.gmu.edu/about-mason/freedom-information-act-requests" target="_blank">FOIA</a></p>
+                            </div>
+                            
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="typeOfUserTip">
+        <b>Branch</b> - Teller type role
+        <br><b>Branch Non-Teller</b> - Non teller, but typically works out of a Branch type location
+        <br><b>Back Office</b> - Bank Professional User
+        <br><b>Call Center</b> - Call Center role - User requires one of the following: CS2100 phone, CCM/aka Symposium inbound ACD, dialer, CRQM call recording. NOTE: You may not consider yourself a call center person but if you require ACD or call recording
+        functionality you are considered Call Center from a telecom perspective.
+        <br><b>Professional</b> - Requires basic phone functionality and voicemail
+        <br><b>Other</b> - Any type of request that does not fall into the above categories. Please attach a document clearly outlining the details of the request.
+    </div>
+
+    <div class="directorTip">
+        Names listed are in the Requestee's org chart as provided by HR. Please select the Requestee's Director from the list. If Requestee is a Director or higher, select their manager. If no manager eid is found, a free text field will be presented. If the
+        Requestee is a VP or higher, please enter Requestee�s EID. If the Requestee is below a VP, then enter Requestee�s Director�s or higher EID.
+    </div>
+
+    <div class="addNewSoftwareTip">
+        Don't see the software you need listed? Click here to create a New Software Request. (Your current request will not be lost; a new window will be opened)
+    </div>
+
+    <div class="hardwareTip">
+        <b>Standard Laptop Bundle</b> - bundle includes a general use laptop , lock, bag and mouse)
+        <br><b>Standard Desktop Bundle</b> - bundle includes a general use desktop (typically for call center user, branch employees, and users requiring a desktop to perform their daily functions), 19IN monitor, keyboard and mouse
+        <br><b>Standard Workstation  Bundle</b> - bundle includes a more powerful (and costly) workstation class desktop (typically for developer, statisticians, BSA, and OA type users), 19IN monitor, standard model laptop, laptop bag, laptop lock, keyboard(s),
+        and mice (cost is incurred by the department)
+        <br><b>Ultra-Portable</b> - smaller laptop, typically provided for the Executive population (cost is incurred by the department)
+        <br><b>Tablet</b> - laptop type devices that allows users to scribe with an included pen (cost is incurred by the department)
+        <br><b>Workstation (High)</b> - high end workstation class desktop (typically for developer, statisticians, BSA, and OA type users - cost is incurred by the department)
+        <br><b>Workstation (Low)</b> - low end workstation class desktop (typically for developer, statisticians, BSA, and OA type users - cost is incurred by the department)
+        <br><b>Developer Laptop</b> - Similar to a standard model laptop, however, slightly larger due to the addition of a full numeric keyboard. (cost is incurred by the department)
+        <br><b>Thin Client</b> - Limited option, primarily for Tulsa call center.
+        <br><b>Mac Laptop (Special)</b> - Unless you are in Brand/Creative or Digital IT, this may not be a valid option. If selected, the Work Flow Coordinator team will follow up with you.
+        <br><b>Mac Desktop (Special)</b> - Unless you are in Brand/Creative or Digital IT, this may not be a valid option. If selected, the Work Flow Coordinator team will follow up with you.
+    </div>
+
+    <div class="networkPortTip">
+        If there is a network cable in the cube and you can plug it into your laptop, you should see green/yellow lights. If you're able to login as well, this would indicate the network port is active in the cube. If you are unsure or you don't feel comfortable
+        testing the connectivity, IT will be able to do this for you.
+        <br>Just select 'No' in the below dropdown list.
+    </div>
+
+    <div class="statusTip">
+        <b>Cancelled</b> - This request has been cancelled. Please click on the request number in the Quote # column for more information.
+        <br><b>Complete</b> - This request has been completed.
+        <br><b>In Progress</b> - The request has been successfully created and assigned to the performing groups to facilitate.
+        <br><b>Submitted</b> - The request has been submitted successfully to the Work Order Team and is in the process of being reviewed.
+        <br><br>Barring any problems or need for additional information from you, the request will be assigned to a provisioner within 24 hours of submission.
+    </div>
+	
+	<div class="targetDateTip">
+		Requests have different expected completion times based on type.
+		<br><b>Hardware</b> - This request takes 1 to 10 days.
+		<br><b>Software</b> - This request takes 1 to 5 days.
+		<br><b>Phone Service</b> - This request takes 1 to 7 days.
+		<br><br>Contact us if your request is taking longer than normal.
+	</div>
+	
+	<div class="originDateTip">
+		Date user request was received.<br>
+		<br>Estimate delivery date based on:
+		<br><b>Hardware</b> - This request takes 1 to 10 days.
+		<br><b>Software</b> - This request takes 1 to 5 days.
+		<br><b>Phone Service</b> - This request takes 1 to 7 days.
+		<br><br>Contact us if your request is taking longer than normal.
+	</div>
+	
+	<div class="titleTip">
+		Requests have different types:
+		<br><b>* H: Hardware</b> - New computer or accessory.
+		<br><b>* S: Software</b>
+		<br><b>* P: Phone Service</b> - Connect phone service to new location.
+		<br><br>Contact us for more info.
+	</div>
+	
+	<div class="notesTip">
+		Brief Special Instructions, Modifications, or Cancellation 
+		<br>reason will be listed here.
+		<br><br>Contact us for more info.
+	</div>
+	
+	<div class="quoteTip">
+		Request identification number
+		<br>Use this ID in all communications for support
+	</div>
+	
+	<div class="userTip">
+		User making request
+	</div>
+	
+    <div class="addVdiPreDefPersonaTip">
+        <b>Task worker</b> - User has limited privileges in OS. No ability to install applications or device drivers. Session will run few applications in total and a limited number of applications concurrently. User persona is redirected outside of the
+        OS. Users will have limited session persistence, in the event of a session disconnect or when moving from one endpoint to another.
+        <br><b>Knowledge worker</b> - User may have limited or be granted elevated access privileges within the OS. User may be able to install applications and devices. User persona is redirected outside of the OS. Users will have limited session persistence,
+        in the event of a session disconnect or when moving from one endpoint to another.
+        <br><b>Developer</b> - User has full privileges to the local operating system and is expected to install applications and devices. User will have session persistence &amp; persona management capabilities.
+    </div>
+
+    <div class="changeVdiPreDefPersonaTip">
+        Select the pre-defined persona that you would like to change to.
+        <br><b>Task worker</b> - User has limited privileges in OS. No ability to install applications or device drivers. Session will run few applications in total and a limited number of applications concurrently. User persona is redirected outside
+        of the OS. Users will have limited session persistence, in the event of a session disconnect or when moving from one endpoint to another.
+        <br><b>Knowledge worker</b> - User may have limited or be granted elevated access privileges within the OS. User may be able to install applications and devices. User persona is redirected outside of the OS. Users will have limited session persistence,
+        in the event of a session disconnect or when moving from one endpoint to another.
+        <br><b>Developer</b> - User has full privileges to the local operating system and is expected to install applications and devices. User will have session persistence &amp; persona management capabilities.
+    </div>
+
+    <div class="removeVdiPreDefPersonaTip">
+        Which components of VDI would you like to remove
+        <br><b>Pre-defined persona</b> - Removes your account's access to VDI.
+        <br><b>Custom Persona</b> - Removes your account access from a specific VDI instance.
+        <br><b>VDI Applications</b> - Removes an application from your Virtual Desktop.
+        <br>NOTE: "Core" Applications common to all desktops cannot be removed.
+    </div>
+ 
+ 
+
+ 
+
+
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable ui-resizable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-helpForm" style="display: none; z-index: 1000; outline: 0px; position: absolute;">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-helpForm">Question/Feedback</span><a href="" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div>
+        <form id="helpForm" style="" class="ui-dialog-content ui-widget-content">
+            <p class="validateTips">All form fields are required.</p>
+            <fieldset>
+                <label for="name">Name</label> <input type="text" name="fromName" id="helpFromName" class="text ui-widget-content ui-corner-all"> <label for="email">Email</label> <input type="text" name="fromEmail" id="helpEmail" value="" class="text ui-widget-content ui-corner-all">
+                <select id="helpSubject" name="subject">
+			<option>General</option>
+			<option>Onboarding(NUR)</option>
+			<option>Modify(MUR)</option>
+			<option>Offboarding(TUR)</option>
+		</select>
+                <div class="countdown">
+                    You have <input readonly="readonly" type="text" id="countdown" size="4" value="1000"> characters out of 1000 left.
+                </div>
+                <textarea id="helpContent" name="content" rows="5"></textarea>
+            </fieldset>
+            <!-- RFC C00599857 -- 1/25/2012 -- START -->
+            <!--  -->
+            <div id="helpLinks">
+                <br>
+                <label for="helpLinks">Help Links</label>
+                <ul id="helpLinks">
+                    <li>
+                        <a href="javascript:window.alert('The page development is in progress')"  class="links">
+                            <font color="blue">Frequently Asked Questions</font>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:window.alert('The page development is in progress')" class="links">
+                            <font color="blue">Submitter's Guide</font>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- RFC C00599857 -- 1/25/2012 -- END -->
+        </form>
+        <!-- Onboard request start -->
+        
+        <form id="onboardForm" style="" class="ui-dialog-content ui-widget-content">
+            <p class="validateTips">All form fields are required.</p>
+            <fieldset>
+            <span id="reqstatus"></span>
+                <label for="title">Title</label> <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all"> <br/>
+                <label for="RequestedBy">Requested By</label> <input type="text" name="requestdBy" id="requestedBy1" value="" class="text ui-widget-content ui-corner-all"> <br/>
+                
+                
+                <!--div class="countdown">
+                    You have <input readonly="readonly" type="text" id="notescountdown" size="4" value="1000"> characters out of 1000 left.
+                </div>
+                <textarea id="notes" name="content" rows="5"></textarea--><br/>
+                <div class="ui-dialog-buttonset"><button type="button" id="onboardsub" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
+                <span class="ui-button-text">Submit</span></button><button id="cancelsub" type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button"><span class="ui-button-text">Close</span></button></div>
+            </fieldset>
+            
+        </form>
+        
+        <!-- onboard request end -->
+        
+        
+        <div class="ui-resizable-handle ui-resizable-n"></div>
+        <div class="ui-resizable-handle ui-resizable-e"></div>
+        <div class="ui-resizable-handle ui-resizable-s"></div>
+        <div class="ui-resizable-handle ui-resizable-w"></div>
+        <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-icon-grip-diagonal-se" style="z-index: 1001;"></div>
+        <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 1002;"></div>
+        <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 1003;"></div>
+        <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 1004;"></div>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-dialog-buttonset"><button type="button" id="sendmail" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Submit</span></button><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                    role="button"><span class="ui-button-text">Cancel</span></button></div>
+        </div>
+    </div>
+    
+    
+    <div class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable" tabindex="-1" role="dialog" aria-labelledby="ui-dialog-title-browser-check-modal" style="display: none; z-index: 1000; outline: 0px;">
+        <div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix"><span class="ui-dialog-title" id="ui-dialog-title-browser-check-modal">Please Note</span><a href="" class="ui-dialog-titlebar-close ui-corner-all" role="button"><span class="ui-icon ui-icon-closethick">close</span></a></div>
+        <div id="browser-check-modal" class="ui-dialog-content ui-widget-content">
+            <p>
+                <b>This application is optimized for Internet Explorer 8!</b>
+            </p>
+            <p>
+                If you are using Internet Explorer 8 and you receive this message, it may be related to the 'Compatibility View' option. To disable this option, please click on the 'Compatibility View' button <img src="./Portal_files/compat_view.png"
+                    alt="Compatibility View Icon" style="margin-bottom: -5px;">, which is located to the right of the browser address bar.
+            </p>
+            <p>
+                If this does not resolve your issue, please contact the Help Desk.
+            </p>
+        </div>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <div class="ui-dialog-buttonset"><button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button"><span class="ui-button-text">Ok</span></button></div>
+        </div>
+    </div>
+</body>
+
+</html>
