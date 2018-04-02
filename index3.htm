@@ -108,7 +108,7 @@
     </script>
     <script type="text/javascript">
         $(function() {
-
+            document.getElementById("modifyrequest").disabled = true;
             $("li img").hover(function() {
                 $(this).toggleClass("hoverItem");
 
@@ -235,7 +235,8 @@
                     if (bValid) {
                         //update data table
                         $("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
-                        $(this).dialog("close");
+                        //$(this).dialog("close");
+                        $("#onboardForm").dialog("close");
                     }
 
 
@@ -373,7 +374,7 @@
                                 <a href="#"><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
                             </li>
                             <li>
-                                <img width="130px" src="./Portal_files/modify-request-new.png" class="">
+                                <img width="130px" id="modifyrequest" src="./Portal_files/modify-request-new.png" class="">
                             </li>
                             <li>
                                 <img width="130px" src="./Portal_files/offboard-request-new.png" class="">
