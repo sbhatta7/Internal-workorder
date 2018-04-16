@@ -59,7 +59,7 @@
                 "scrollCollapse": true
             });
 
-			
+
         });
 
         function loadTab(tabindex) {
@@ -244,7 +244,7 @@
             $("#onboardsub")
                 .click(function() {
                     $("#requestResult").addClass("").html("");
-					// write to data table
+                    // write to data table
                     //alert("onboard sub");
                     var title = $("#title").val(),
                         requestedBy1 = $("#requestedBy1").val(),
@@ -290,7 +290,7 @@
                         //$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
                         $('#onboardForm')[0].reset();
                         $("#onboardForm").dialog("close");
-						$("#requestResult").addClass("ui-state-error-text").html("REQUEST CREATED");
+                        $("#requestResult").addClass("ui-state-error-text").html("REQUEST CREATED");
                     }
 
                 });
@@ -340,8 +340,8 @@
                         <div class="btnHome">
                             <a href="">Home</a>
                         </div>
-                        <div class="btnHelp" id="contact" title="Contact us">
-                            <span>Contact Us</span>
+                        <div class="btnHelp" id="contact" title="Fill in form to serve you better">
+                            <span>Fill in form to serve you better</span>
                         </div>
 
                         <!--<div id="loggedIn" style="position: absolute; top: 40px; right: 0px; text-align: right; padding-bottom: 0px; padding-left: 0px; padding-right: 10px; color: #ffffff; padding-top: 0px;">
@@ -356,7 +356,8 @@
 
                     <div id="newFeatureBanner" style="position:relative;top:-35px; padding:0px 10px;align:left;">
                         <div style="color: blue; border:3px solid; border-color: yellow; font-weight: bold; font-size: 16px; text-align:left">
-                            <div style="padding: 5px;">How to Add a work order: <br/>1. Click on "ONBOARD REQUEST" below<br/> 2. Fill the details (Title and Requested By) and submit. Your request will be added to the top of the list below<br/> 3. Search for your name or title of your request to filter list to current user requests
+                            <div style="padding: 5px;">How to Add a work order: <br/>1. Click on "ONBOARD REQUEST" below<br/> 2. Fill the details (Title and Requested By) and submit. Your request will be added to the top of the list below<br/> 3. Search for your name or title of
+                                your request to filter list to current user requests
                                 <br/>
                             </div>
                         </div>
@@ -371,19 +372,19 @@
                                 <a href="#"><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
                             </li>
                             <li>
-                                <img width="130px" id="tipModifyRequest" src="./Portal_files/modify-request-new.png" class="ui-state-disabled"/>
+                                <img width="130px" id="tipModifyRequest" src="./Portal_files/modify-request-new.png" class="ui-state-disabled" />
                             </li>
                             <li>
-                                <img width="130px" id="tipOffboardRequest" src="./Portal_files/offboard-request-new.png" class="ui-state-disabled"/>
+                                <img width="130px" id="tipOffboardRequest" src="./Portal_files/offboard-request-new.png" class="ui-state-disabled" />
                             </li>
                             <li>
-                                <img width="130px" id="tipMyRequest" src="./Portal_files/myrequests-new.png" class="ui-state-disabled"/>
+                                <img width="130px" id="tipMyRequest" src="./Portal_files/myrequests-new.png" class="ui-state-disabled" />
                             </li>
                             <!--  <li><a href="createNewSoftwareRequest.do"><img width="130px" src="resources/images/add_software_button.png"></a></li>-->
                         </ul>
                     </div>
 
-					<div id="requestResult" style="text-align:center" class=""></div>
+                    <div id="requestResult" style="text-align:center" class=""></div>
 
 
 
@@ -825,7 +826,8 @@
         <form id="helpForm" style="" class="ui-dialog-content ui-widget-content">
             <p class="validateTips">All form fields are required.</p>
             <fieldset>
-                <label for="name">Name</label> <input type="text" name="fromName" id="helpFromName" class="text ui-widget-content ui-corner-all"> <label for="email">Email</label> <input type="text" name="fromEmail" id="helpEmail" value="" class="text ui-widget-content ui-corner-all">
+                <label for="name">Name</label> <input type="text" readonly="readonly" name="fromName" id="helpFromName" class="text ui-widget-content ui-corner-all"> <label for="email">Email</label> <input type="text" readonly="readonly" name="fromEmail"
+                    id="helpEmail" value="" class="text ui-widget-content ui-corner-all">
                 <select id="helpSubject" name="subject">
 			<option>General</option>
 			<option>Onboarding(NUR)</option>
@@ -835,10 +837,10 @@
                 <div class="countdown">
                     You have <input readonly="readonly" type="text" id="countdown" size="4" value="1000"> characters out of 1000 left.
                 </div>
-                <textarea id="helpContent" name="content" rows="5"></textarea>
+                <textarea id="helpContent" name="content" rows="5" autofocus></textarea>
             </fieldset>
             <!-- RFC C00599857 1/25/2012  START -->
-            
+
             <div id="helpLinks">
                 <br>
                 <label for="helpLinks">Help Links</label>
