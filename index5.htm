@@ -59,7 +59,7 @@
                 "scrollCollapse": true
             });
 
-			
+
         });
 
         function loadTab(tabindex) {
@@ -244,7 +244,7 @@
             $("#onboardsub")
                 .click(function() {
                     $("#requestResult").addClass("").html("");
-					// write to data table
+                    // write to data table
                     //alert("onboard sub");
                     var title = $("#title").val(),
                         requestedBy1 = $("#requestedBy1").val(),
@@ -252,8 +252,8 @@
                         allFields = $([]).add(title).add(requestedBy1);
                     allFields.removeClass("ui-state-error");
                     var bValid = true;
-                    bValid = bValid && checkLength(title, "title", 2, 30,$("#title") );
-                    bValid = bValid && checkLength( requestedBy1, "requestedBy1", 2, 80,$("#requestedBy1") );
+                    bValid = bValid && checkLength(title, "title", 2, 30, $("#title"));
+                    bValid = bValid && checkLength(requestedBy1, "requestedBy1", 2, 80, $("#requestedBy1"));
                     //bValid = bValid && checkLength( notescountdown, "notescountdown", 3, 1000 );
                     //alert(bValid);
                     if (bValid) {
@@ -290,7 +290,7 @@
                         //$("#reqstatus").addClass("ui-state-error").html("Request Created<br/>");
                         $('#onboardForm')[0].reset();
                         $("#onboardForm").dialog("close");
-						$("#requestResult").addClass("ui-state-error-text").html("REQUEST ADDED ON TOP OF LIST");
+                        $("#requestResult").addClass("ui-state-error-text").html("REQUEST ADDED ON TOP OF LIST");
                     }
 
                 });
@@ -309,7 +309,7 @@
 
         });
 
-        function checkLength(o, n, min, max,el) {
+        function checkLength(o, n, min, max, el) {
             if (o.length > max || o.length < min) {
                 el.addClass("ui-state-error");
                 updateTips("Length of " + n + " must be between " +
@@ -356,8 +356,7 @@
 
                     <div id="newFeatureBanner" style="position:relative;top:-35px; padding:0px 10px;align:left;">
                         <div style="color: blue; border:3px solid; border-color: yellow; font-weight: bold; font-size: 16px; text-align:left">
-                            <div style="padding: 5px;">1. Check Status of Current Request: <br/>* Filter list below using search box (name, title or date)<br/>
-								2. How to Add a work order: <br/>* Click on "ONBOARD REQUEST" below<br/>
+                            <div style="padding: 5px;">1. Check Status of Current Request: <br/>* Filter list below using search box (name, title or date)<br/> 2. How to Add a work order: <br/>* Click on "ONBOARD REQUEST" below<br/>
                             </div>
                         </div>
                     </div>
@@ -366,24 +365,24 @@
                     <!-- home page buttons-->
 
                     <div style="position:relative; top:-30px; text-align:center;">
-                        <ul id="mainMenu" style="margin-left:-50px">
+                        <ul id="mainMenu" style="margin-left:-70px">
                             <li>
                                 <a href="#"><img width="130px" src="./Portal_files/onboard-request-new.png" id="onboardreq" class=""></a>
                             </li>
-                            <li >
-                                <img width="130px" id="tipModifyRequest" src="./Portal_files/modify-request-new.png" class="disabled"/>
+                            <li>
+                                <img width="130px" id="tipModifyRequest" src="./Portal_files/modify-request-new.png" class="disabled" />
                             </li>
                             <li>
-                                <img width="130px" id="tipOffboardRequest" src="./Portal_files/offboard-request-new.png" class="disabled"/>
+                                <img width="130px" id="tipOffboardRequest" src="./Portal_files/offboard-request-new.png" class="disabled" />
                             </li>
                             <li>
-                                <img width="130px" id="tipMyRequest" src="./Portal_files/myrequests-new.png" class="disabled"/>
+                                <img width="130px" id="tipMyRequest" src="./Portal_files/myrequests-new.png" class="disabled" />
                             </li>
                             <!--  <li><a href="createNewSoftwareRequest.do"><img width="130px" src="resources/images/add_software_button.png"></a></li>-->
                         </ul>
                     </div>
 
-					<div id="requestResult" style="text-align:center" class=""></div>
+                    <div id="requestResult" style="text-align:center" class=""></div>
 
 
 
@@ -675,12 +674,10 @@
                         </div>
                     </div>
                     <!-- end data table div -->
-                    <div style="height:50px" id="spacer"></div>
+
                     <div class="footer">
 
-                        <div class="branding">
-                            <a href="http://gmu.edu" target="_blank"><img src="./Portal_files/mason-logo.png" alt="George Mason University"></a>
-                        </div>
+
                         <div class="social-media-and-copyright">
 
 
@@ -838,7 +835,7 @@
                 <textarea id="helpContent" name="content" rows="5" autofocus></textarea>
             </fieldset>
             <!-- RFC C00599857 1/25/2012  START -->
-            
+
             <div id="helpLinks">
                 <br>
                 <label for="helpLinks">Help Links</label>
@@ -864,8 +861,9 @@
             <p class="validateTips">All form fields are required. <br/> * Title: Name of Service Requested (min 2 characters)<br/> * Requested By: Name of user requesting service (min 2 characters)</p>
             <fieldset>
                 <span id="reqstatus"></span>
-                <label for="title">Title</label> <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all"> <br/>
-                <label for="RequestedBy">Requested By</label> <input type="text" name="requestdBy" id="requestedBy1" value="" class="text ui-widget-content ui-corner-all"> <br/>
+                <label for="title"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Title:</b></label> <input type="text" name="title" id="title" class="text ui-widget-content ui-corner-all"> <br/>
+                <br/><label for="RequestedBy"><b>Requested By:</b></label> <input type="text" name="requestdBy" id="requestedBy1" value="" class="text ui-widget-content ui-corner-all"> <br/>
 
 
                 <!--div class="countdown">
