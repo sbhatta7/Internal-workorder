@@ -320,6 +320,12 @@
             }
         }
     </script>
+	
+	<style>
+	.dataTables_filter label, .dataTables_filter input, .dataTables_length, .dataTables_info {
+    font-weight:bold;
+	}
+	</style>
 </head>
 
 <body>
@@ -389,11 +395,11 @@
                     <!-- end home page buttons -->
                     <div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all noBackgroundOrBorder" style="width: 1200px;">
                         <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all noBackgroundOrBorder">
-                            <li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="Portal.htm">Requests</a></li>
+                            <li tabindex="0" class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active" style="font-weight: bold;font-size: 16px;"><a>Current Requests</a></li>
                             <!--li class="ui-state-default ui-corner-top"><a href="index.htm">Pending Approvals</a></li>
                             <li class="ui-state-default ui-corner-top"><a href="index.htm">Software Requests</a></li-->
                         </ul>
-                        <div id="tab_Requests" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+                        <div id="tab_Requests" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="border-color: yellow;">
                             <div class="tabContent">
                                 <div>
                                     <!-- start data table div -->
@@ -858,7 +864,7 @@
         <!-- Onboard request start -->
 
         <form id="onboardForm" style="" class="ui-dialog-content ui-widget-content">
-            <p class="validateTips">All form fields are required. <br/> * Title: Name of Service Requested (min 2 characters)<br/> * Requested By: Name of user requesting service (min 2 characters)</p>
+            <p class="validateTips" style="color: blue; border:3px solid; border-color: yellow; font-weight: bold; font-size: 12px; text-align:left">All form fields are required. <br/> * Title: Name of Service Requested (min 2 characters)<br/> * Requested By: Name of user requesting service (min 2 characters)</p>
             <fieldset>
                 <span id="reqstatus"></span>
                 <label for="title"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
